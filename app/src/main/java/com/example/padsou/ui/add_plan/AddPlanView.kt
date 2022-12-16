@@ -13,9 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.padsou.ui.shared.TextInput
-import com.example.padsou.ui.shared.TextInputWithTitle
-import com.example.padsou.ui.shared.TopPageTitle
+import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
@@ -40,6 +38,12 @@ fun AddPlanView(){
             horizontalAlignment = Alignment.CenterHorizontally
         )
         {
+            Spacer(modifier = Modifier.height(27.dp))
+            Row() {
+                AddPlanStepMarker(filled = false)
+                Spacer(modifier = Modifier.width(12.dp))
+                AddPlanStepMarker(filled = false)
+            }
             Spacer(modifier = Modifier.height(32.dp))
             TextInputWithTitle(placeholder = "Abonnement de 1 an Basic-Fit", title = "Titre")
             Spacer(modifier = Modifier.height(32.dp))
