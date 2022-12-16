@@ -7,15 +7,15 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = MainPurple,
+    primaryVariant = MainPurple,
+    secondary = MainCorail
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = MainPurple,
+    primaryVariant = MainPurple,
+    secondary = MainCorail
 
     /* Other default colors to override
     background = Color.White,
@@ -37,7 +37,7 @@ fun PadsouTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
+        typography = IntergralCFTypography,
         shapes = Shapes,
         content = content
     )
