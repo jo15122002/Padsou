@@ -25,7 +25,7 @@ import com.example.padsou.ui.theme.MainPurple
 @Composable
 fun TextInputWithTitle(placeholder:String, height: Dp = 56.dp, title:String){
     Column() {
-        Text(text = title, modifier = Modifier.padding(start = 35.dp))
+        Text(text = title, modifier = Modifier.padding(start = 35.dp, bottom = 7.dp))
         TextInput(placeholder = placeholder, height = height)
     }
 }
