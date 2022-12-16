@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "854609600104",
+    "project_id": "android-padsou",
+    "storage_bucket": "android-padsou.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854609600104:android:af6d42f5e94b45fecae5dd",
+        "android_client_info": {
+          "package_name": "com.example.padsou"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854609600104-r6m6thjvr382l2pcg4k7c3cj936mig2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXL_LzhfGPdqVpd0gAgniDx-xl4gOttD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854609600104-r6m6thjvr382l2pcg4k7c3cj936mig2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
