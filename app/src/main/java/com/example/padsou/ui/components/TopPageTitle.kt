@@ -13,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 
 @Composable
 fun TopPageTitle(title:String, subTitle:String){
-    val db = Firebase.firestore
     Column(modifier = Modifier.background(Color(0xFF5f67ea))) {
         Text(text = title)
         Text(text = subTitle)
