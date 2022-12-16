@@ -28,12 +28,13 @@ fun TextInput(placeholder:String, height: Dp = 56.dp){
     OutlinedTextField(value = inputText, onValueChange = { inputText = it }, placeholder = {
         Text(placeholder)
     },
+        shape = RoundedCornerShape(15.dp),
         modifier = Modifier.fillMaxWidth()
         .height(height)
         .padding(horizontal = 31.dp)
+        .clip(RoundedCornerShape(15.dp))
         .background(Color.White),
-        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White),
-        shape = RoundedCornerShape(15.dp)
+        colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White)
     )
 }
 
