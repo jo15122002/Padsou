@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.padsou.ui.add_plan.AddPlanView
+import com.example.padsou.ui.theme.IntergralCFTypography
 import com.example.padsou.ui.theme.PadsouTheme
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -24,8 +25,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Column() {
-                AddPlanView()
+            MaterialTheme(
+                typography = IntergralCFTypography
+            ){
+                Column() {
+                    AddPlanView()
+                }
             }
         }
     }
