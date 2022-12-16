@@ -79,9 +79,7 @@ fun PlanProfile(plan: Plan){
             Text(text = plan.title, style = TextStyle(color = TextBlack, fontWeight = FontWeight.W700, fontSize = 11.sp))
             Text(text = plan.description, style = TextStyle(color = TextBlack, fontSize = 7.sp))
         }
-
     }
-
 }
 
 @Preview(showBackground = true)
