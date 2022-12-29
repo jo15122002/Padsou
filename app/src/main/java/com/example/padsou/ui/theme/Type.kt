@@ -39,7 +39,16 @@ val IntergralCFTypography = Typography(
         fontWeight= FontWeight.Normal,
         fontSize = 18.sp
     ),
-
+    h4 = TextStyle( // ex: Les plans du moments ... on Home page
+        fontFamily = intergralCF,
+        fontWeight= FontWeight.Bold,
+        fontSize = 14.sp
+    ),
+    h5 = TextStyle( // ex: Category Name ... on Home page
+        fontFamily = intergralCF,
+        fontWeight= FontWeight.Bold,
+        fontSize = 10.sp
+    ),
 
 
 )

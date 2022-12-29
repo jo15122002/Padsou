@@ -24,6 +24,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -33,30 +34,50 @@ import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.TextBlack
 
 @Composable
-fun PlanProfile(plan: Plan){
+fun PlanProfile(
+    plan: Plan = Plan.defaultPlan(),
+    isBig: Boolean = false
+){
+    var height = 100.dp
+    if(isBig) height = 150.dp
 
     Card(
         modifier = Modifier
             .padding(4.dp)
             .width(100.dp)
-            .height(100.dp),
+            .height(height)
+            .then(
+                if (isBig)
+                    Modifier.clip(RoundedCornerShape(10.dp))
+                else
+                    Modifier.clip(RoundedCornerShape(15.dp))
+            ),
         elevation = 0.dp
     ) {
-        Column() {
+        Column(modifier = Modifier.padding(7.dp)) {
             Box(
-                contentAlignment = Alignment.BottomCenter
+                contentAlignment = Alignment.BottomCenter,
             ) {
                 Box(
-                    Modifier.padding(bottom = 15.dp)
+                    Modifier
+                        .padding(bottom = 15.dp)
                 ) {
                     AsyncImage(
                         model = plan.photoUrl,
                         contentDescription = null,
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .height(50.dp)
+                            .then(
+                                if (isBig)
+                                    Modifier
+                                        .clip(RoundedCornerShape(10.dp))
+                                        .height(height * 3 / 5)
+                                else
+                                    Modifier
+                                        .clip(RoundedCornerShape(6.dp))
+                                        .height(height / 2)
+                            )
                             .fillMaxSize()
-                            .clip(RoundedCornerShape(6.dp))
                     )
                 }
                 Card(
@@ -76,8 +97,12 @@ fun PlanProfile(plan: Plan){
                     )
                 }
             }
-            Text(text = plan.title, style = TextStyle(color = TextBlack, fontWeight = FontWeight.W700, fontSize = 11.sp))
-            Text(text = plan.description, style = TextStyle(color = TextBlack, fontSize = 7.sp))
+            Column(Modifier.padding(horizontal = 10.dp)) {
+
+                Text(text = plan.title, style = TextStyle(color = TextBlack, fontWeight = FontWeight.W700, fontSize = 11.sp))
+                Text(text = plan.description, style = TextStyle(color = TextBlack, fontSize = 7.sp))
+            }
+
         }
     }
 }
@@ -85,5 +110,5 @@ fun PlanProfile(plan: Plan){
 @Preview(showBackground = true)
 @Composable
 fun DefaultPlanProfilePreview() {
-    PlanProfile(Plan.defaultPlan())
+    PlanProfile()
 }
