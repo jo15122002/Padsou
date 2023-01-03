@@ -38,19 +38,23 @@ fun PlanProfile(
     plan: Plan = Plan.defaultPlan(),
     isBig: Boolean = false
 ){
-    var height = 100.dp
+    var height = 105.dp
     if(isBig) height = 150.dp
 
     Card(
         modifier = Modifier
             .padding(4.dp)
-            .width(100.dp)
             .height(height)
             .then(
                 if (isBig)
-                    Modifier.clip(RoundedCornerShape(10.dp))
+                    Modifier
+                        .clip(RoundedCornerShape(10.dp))
+                        .fillMaxWidth()
                 else
-                    Modifier.clip(RoundedCornerShape(15.dp))
+                    Modifier
+                        .clip(RoundedCornerShape(15.dp))
+                        .width(100.dp)
+
             ),
         elevation = 0.dp
     ) {

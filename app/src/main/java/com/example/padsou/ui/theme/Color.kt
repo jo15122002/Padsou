@@ -25,3 +25,8 @@ val PartyColor = Color(0xFF7C8CF9)
 
 // Plan Notation
 val YellowStar = Color(0xFFFFC107)
+
+// Bottom bar
+val IconColor = Color(0xFFBABFCD)
+val IconBackground = Color(0xFFF2F2F2)
+

@@ -2,24 +2,25 @@ package com.example.padsou.data.models;
 
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import androidx.compose.ui.graphics.Color
 import androidx.core.content.res.ResourcesCompat
 import com.example.padsou.R
+import com.example.padsou.ui.theme.CourseColor
 
-class Category (var name: String, var color: String, var iconUrl: String){
+class Category (var name: String, var color: Color, var iconUrl: String){
 
 
     companion object {
         fun defaultCategory(): Category{
             return Category(
                 "Sport",
-                "#605DF5",
+                CourseColor,
                 "ic_sport"
             )
         }
     }
 
     fun getIcon(): Int {
-
-        val drawable: Drawable? = ResourcesCompat.getDrawable(resources, R.drawable., null)
+        return R.drawable.ic_sport
     }
 }

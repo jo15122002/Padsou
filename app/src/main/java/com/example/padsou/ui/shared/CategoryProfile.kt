@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -33,20 +30,26 @@ fun CategoryProfile(category: Category = Category.defaultCategory()){
 
     Column(
         modifier = Modifier.padding(10.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
         Box(
             modifier = Modifier
                 .size(57.dp)
-                .background(CourseColor),
+                .clip(RoundedCornerShape(5.dp))
+                .background(category.color),
             contentAlignment = Alignment.Center
         ){
             Icon(
                 painter = painterResource(category.getIcon()),
-                contentDescription = category.iconUrl
+                contentDescription = category.iconUrl,
+                tint = Color.White,
+                modifier = Modifier.size(20.dp)
             )
         }
-        Text("Sport")
+        Text("Sport",
+            style = MaterialTheme.typography.h5,
+            color = category.color)
     }
 }
 

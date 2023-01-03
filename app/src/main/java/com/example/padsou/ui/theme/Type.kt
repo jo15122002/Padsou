@@ -47,7 +47,7 @@ val IntergralCFTypography = Typography(
     h5 = TextStyle( // ex: Category Name ... on Home page
         fontFamily = intergralCF,
         fontWeight= FontWeight.Bold,
-        fontSize = 10.sp
+        fontSize = 11.sp
     ),
 
 
