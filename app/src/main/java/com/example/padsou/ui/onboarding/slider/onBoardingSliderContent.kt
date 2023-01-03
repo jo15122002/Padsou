@@ -27,14 +27,14 @@ fun onBoardingSliderContent(){
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile(Plan.defaultPlan())
-            PlanProfile(Plan.defaultPlan())
+            PlanProfile()
+            PlanProfile()
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile(Plan.defaultPlan())
-            PlanProfile(Plan.defaultPlan())
+            PlanProfile()
+            PlanProfile()
         }
     }
 
