@@ -14,6 +14,8 @@ val TextNavy = Color(0xFF393145)
 val TextBlack = Color(0xFF1B191A)
 val TextGray = Color(0xFF747685)
 val TextLightGray = Color(0xFFA6A6A6)
+val Placeholder = Color(0xFFD2CECE)
+val SeeMore = Color(0xFFFC6B68)
 
 // Plan Category
 val CourseColor = Color(0xFF605DF5)
@@ -23,3 +25,8 @@ val PartyColor = Color(0xFF7C8CF9)
 
 // Plan Notation
 val YellowStar = Color(0xFFFFC107)
+
+// Bottom bar
+val IconColor = Color(0xFFBABFCD)
+val IconBackground = Color(0xFFF2F2F2)
+

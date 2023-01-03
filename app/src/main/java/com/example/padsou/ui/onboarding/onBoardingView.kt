@@ -22,7 +22,7 @@ import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 
 @Composable
-fun onBoardingPage(){
+fun onBoardingPage(onNavigate : ()->Unit){
 
     Column(
         modifier = Modifier
@@ -41,11 +41,18 @@ fun onBoardingPage(){
         }
         onBoardingSlider()
 
+        /*Button(
+            onClick = onNavigate,
+            modifier = Modifier
+                .background(MainCorail, shape = RoundedCornerShape(18.dp))
+                .padding(horizontal = 67.dp, vertical = 18.dp),
+        ) {
+            Text("C'EST PARTI !", color = Color.White, style = MaterialTheme.typography.h3)
+        }*/
         Box(modifier = Modifier
-            .clickable { }
+            .clickable { onNavigate() }
             .background(MainCorail, shape = RoundedCornerShape(18.dp))
             .padding(horizontal = 67.dp, vertical = 18.dp),
-
         ) {
             Text("C'EST PARTI !", color = Color.White, style = MaterialTheme.typography.h3)
         }
@@ -55,5 +62,5 @@ fun onBoardingPage(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultOnBoardingPreview() {
-    onBoardingPage()
+    onBoardingPage(onNavigate = {})
 }
