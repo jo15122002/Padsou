@@ -23,17 +23,15 @@ import com.example.padsou.ui.theme.MainPurple
 
 
 @Composable
-fun TextInput(placeholder:String, height: Dp = 56.dp){
+fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
     var inputText by remember { mutableStateOf("") }
-    OutlinedTextField(value = inputText, onValueChange = { inputText = it }, placeholder = {
-        Text(placeholder)
-    },
+    OutlinedTextField(value = inputText, onValueChange = { inputText = it }, placeholder = placeholder,
         shape = RoundedCornerShape(15.dp),
-        modifier = Modifier.fillMaxWidth()
-        .height(height)
-        .padding(horizontal = 31.dp)
-        .clip(RoundedCornerShape(15.dp))
-        .background(Color.White),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(height)
+            .clip(RoundedCornerShape(15.dp))
+            .background(Color.White),
         colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White)
     )
 }
@@ -42,5 +40,5 @@ fun TextInput(placeholder:String, height: Dp = 56.dp){
 @Preview(showBackground = true)
 @Composable
 fun TextInputPreview() {
-    TopPageTitle("Un titre", "Un sous-titre")
+    TextInput(placeholder = { Text("Un titre") })
 }

@@ -16,6 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.padsou.ui.add_plan.AddPlanView
 import com.example.padsou.ui.theme.IntergralCFTypography
 import com.example.padsou.ui.theme.PadsouTheme
+import androidx.navigation.compose.rememberNavController
+import com.example.padsou.ui.onboarding.onBoardingPage
+import com.example.padsou.ui.shared.PadsouNavHost
+import com.example.padsou.ui.theme.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -27,12 +31,14 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme(
                 typography = IntergralCFTypography
-            ){
+            ) {
+                PadsouNavHost()
                 Column() {
                     AddPlanView()
                 }
             }
         }
+
     }
 }
 

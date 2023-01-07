@@ -20,7 +20,7 @@ val intergralCF = FontFamily(
 // Set of Material typography styles to start with
 val IntergralCFTypography = Typography(
     body1 = TextStyle(
-        fontFamily = intergralCF,
+        fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
     ),
@@ -39,5 +39,17 @@ val IntergralCFTypography = Typography(
         fontWeight= FontWeight.Normal,
         fontSize = 18.sp
     ),
+    h4 = TextStyle( // ex: Les plans du moments ... on Home page
+        fontFamily = intergralCF,
+        fontWeight= FontWeight.Bold,
+        fontSize = 14.sp
+    ),
+    h5 = TextStyle( // ex: Category Name ... on Home page
+        fontFamily = intergralCF,
+        fontWeight= FontWeight.Bold,
+        fontSize = 11.sp
+    ),
+
+
 )
 
