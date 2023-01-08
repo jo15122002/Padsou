@@ -26,43 +26,7 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun AddPlanView(navController: NavHostController){
     val db = Firebase.firestore
-    Column(modifier =
-    Modifier
-        .background(MainPurple)
-        .fillMaxWidth()
-        .fillMaxHeight()
-    ) {
-        TopPageTitle("Ajouter", "Un bon plan pour en faire profiter les autres")
-        Column (modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
-            .background(BackgroundWhite)
-            .fillMaxHeight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
-            Spacer(modifier = Modifier.height(27.dp))
-            Row() {
-                AddPlanStepMarker(filled = false)
-                Spacer(modifier = Modifier.width(12.dp))
-                AddPlanStepMarker(filled = false)
-            }
-            Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "Abonnement de 1 an Basic-Fit", title = "Titre")
-            Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "Ne soit pas trop bavard, on s'en fout va à l'essentiel :D", height = 119.dp, title = "Description")
-            Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "www.lienVersTonBonPlan.com", title = "Lien")
-            Spacer(modifier = Modifier.height(32.dp))
-            Box(modifier = Modifier
-                .clickable { }
-                .background(MainPurple, shape = RoundedCornerShape(18.dp))
-                .padding(horizontal = 133.dp, vertical = 18.dp)
-            ) {
-                Text("SUIVANT", color = Color.White, style = MaterialTheme.typography.h3)
-            }
-        }
-    }
+    AddPlanDescPage()
 }
 
 
