@@ -13,6 +13,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainCorail
@@ -21,7 +24,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 @Composable
-fun AddPlanView(){
+fun AddPlanView(navController: NavHostController){
     val db = Firebase.firestore
     Column(modifier =
     Modifier
@@ -66,5 +69,5 @@ fun AddPlanView(){
 @Preview(showBackground = true)
 @Composable
 fun AddPlanViewPreview() {
-    AddPlanView()
+    AddPlanView(navController = rememberNavController())
 }
