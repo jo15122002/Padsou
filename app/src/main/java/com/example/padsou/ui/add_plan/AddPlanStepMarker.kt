@@ -27,6 +27,6 @@ fun AddPlanStepMarker(filled:Boolean = false){
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultOnBoardingPreview() {
+fun DefaultAddPlanStepMarkerPreview() {
     AddPlanStepMarker()
 }
