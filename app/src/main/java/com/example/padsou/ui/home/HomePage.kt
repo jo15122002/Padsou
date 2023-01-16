@@ -24,15 +24,12 @@ import com.example.padsou.R
 import com.example.padsou.data.database.Database
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
-import com.example.padsou.ui.shared.CategoryProfile
-import com.example.padsou.ui.shared.PlanProfile
-import com.example.padsou.ui.shared.TextInput
-import com.example.padsou.ui.shared.shimmerBackground
+import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.*
 
 
 @Composable
-fun HomePage(viewModel: HomeViewModel){
+fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (String)->Unit){
 
     val categories: State<List<Category>> = viewModel.categories.collectAsState()
     val isLoadedCategory: State<Boolean> = viewModel.isLoadedCategory.collectAsState()
@@ -86,7 +83,7 @@ fun HomePage(viewModel: HomeViewModel){
                             .fillMaxWidth()
                     ) {
                         categories.value.map { c ->
-                            CategoryProfile(c)
+                            CategoryProfile(c, onCategoryClick)
                         }
                     }
                     Spacer(modifier = Modifier.height(39.dp))
@@ -98,27 +95,7 @@ fun HomePage(viewModel: HomeViewModel){
                         Text("Les plans du moments", style = MaterialTheme.typography.h4)
                         Text("Voir tout", color = SeeMore, fontWeight = FontWeight.W700)
                     }
-                    Row(
-                        modifier = Modifier
-                            .padding(top = 16.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(5.dp)
-                    ) {
-                        var size = plans.value.size / 2
-                        if(size >= 3) size += 1
-                        if(size <= 1) size += 1
-                        val temp = plans.value.chunked(size)
-                        temp.forEach { list ->
-                            Column(
-                                Modifier
-                                    .weight(1f)
-                            ) {
-                                list.forEach { plan ->
-                                    PlanProfile(plan, true)
-                                }
-                            }
-                        }
-                    }
+                    ListPlanProfile(plans.value)
                 }
             }
         }else{

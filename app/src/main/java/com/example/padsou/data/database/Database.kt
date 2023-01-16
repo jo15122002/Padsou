@@ -18,10 +18,6 @@ object Database{
 
     private var db = Firebase.firestore
 
-    fun loadHomePageData(){
-        //getAllCategory()
-    }
-
     fun getAllCategory(onSuccess : (MutableList<Category>)->Unit) = GlobalScope.async {
         val items = mutableListOf<Category>()
         db.collection("category")
@@ -29,6 +25,7 @@ object Database{
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val localCategory = document.toObject<Category>()
+                    localCategory.id = document.id
                     items.add(localCategory)
                     Log.d("ViewModel", "DocumentSnapshot localCategory: $localCategory")
                 }
@@ -44,6 +41,7 @@ object Database{
             .addOnSuccessListener { result ->
                 for (document in result) {
                     val localPlan = document.toObject<Plan>()
+                    localPlan.id = document.id
                     items.add(localPlan)
                     Log.d("ViewModel", "DocumentSnapshot localPlan: $localPlan")
                 }

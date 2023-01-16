@@ -9,4 +9,5 @@ sealed class Screen(val route: String, val icon: Int) {
     object SignIn : Screen("signIn", R.drawable.ic_home)
     object AddPlan : Screen("addPlan", R.drawable.ic_add)
     object Profile : Screen("profile", R.drawable.ic_profile)
+    object PlansByCategory : Screen("plansByCategory", R.drawable.ic_home)
 }
