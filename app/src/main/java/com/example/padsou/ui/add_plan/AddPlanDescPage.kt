@@ -1,9 +1,12 @@
 package com.example.padsou.ui.add_plan
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -47,10 +50,10 @@ fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPh
             .fillMaxWidth()
             .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
             .background(BackgroundWhite)
-            .fillMaxHeight(1f),
+            .fillMaxHeight(1f)
+            .padding(horizontal = 35.dp),
             horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
+        ) {
             Spacer(modifier = Modifier.height(27.dp))
             Row() {
                 AddPlanStepMarker(filled = false)
@@ -92,14 +95,22 @@ fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPh
                 }
             )
             Spacer(modifier = Modifier.height(32.dp))
-            Box(modifier = Modifier
-                .clickable { navigateToAddPlanPhoto() }
-                .background(MainPurple, shape = RoundedCornerShape(18.dp))
-                .padding(horizontal = 133.dp, vertical = 18.dp)
+            Button(modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp),
+                onClick = {
+                    navigateToAddPlanPhoto()
+                },
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MainPurple,
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(18.dp),
+                enabled = titleInput.isValid() && descInput.isValid() && urlInput.isValid()
             ) {
                 Text("SUIVANT", color = Color.White, style = MaterialTheme.typography.h3)
             }
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(312.dp))
         }
     }
 }
