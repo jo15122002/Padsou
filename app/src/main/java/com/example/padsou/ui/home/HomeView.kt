@@ -1,5 +1,6 @@
 package com.example.padsou.ui.home
 
+import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -10,12 +11,12 @@ import com.example.padsou.ui.shared.Layout
 @Composable
 fun HomeView(navController: NavHostController){
 
-    val viewModel = HomeViewModel()
+    Log.d("ViewModel", "init home view")
 
     Layout(
-        navController =navController,
+        navController = navController,
         content = {
-            HomePage(viewModel)
+            HomePage()
         }
     )
 }

@@ -29,21 +29,17 @@ import com.example.padsou.data.models.Plan
 import com.example.padsou.ui.shared.CategoryProfile
 import com.example.padsou.ui.shared.PlanProfile
 import com.example.padsou.ui.shared.TextInput
+import com.example.padsou.ui.shared.shimmerBackground
 import com.example.padsou.ui.theme.*
 
 
 @Composable
-fun HomePage(viewModel: HomeViewModel){
+fun HomePage(viewModel: HomeViewModel = HomeViewModel()){
 
-    val categories = remember{viewModel.categories}
+    val categories: State<List<Category>> = viewModel.categories.collectAsState()
+    val isLoaded: State<Boolean> = viewModel.isLoaded.collectAsState()
 
-    LaunchedEffect(key1 = true) {
-        Log.d("ViewModel", "Loading cate")
-        viewModel.loadCategory()
-
-    }
-
-    Log.d("ViewModel", "Home updated:")
+    Log.d("ViewModel", "init Home page")
 
     var data = listOf(
         listOf(
@@ -70,7 +66,7 @@ fun HomePage(viewModel: HomeViewModel){
         item{
             Column(Modifier.padding(horizontal = 33.dp)){
                 Text("COUCOU TOI,", color = Color.White, style = MaterialTheme.typography.h1)
-                Text("T'es en manque de thunes ?,", color = Color.White, style = MaterialTheme.typography.body1)
+                Text("T'es en manque de thunes ?", color = Color.White, style = MaterialTheme.typography.body1)
                 Box(modifier = Modifier.padding(top = 45.dp, bottom = 34.dp)){
                     TextInput(placeholder = {
                         Row(
@@ -88,47 +84,67 @@ fun HomePage(viewModel: HomeViewModel){
                 }
             }
         }
-        item {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
-                    .background(BackgroundWhite)
-                    .padding(28.dp, 30.dp),
-            ) {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    categories.map { c ->
-                        CategoryProfile(c)
-                    }
-                }
-                Spacer(modifier = Modifier.height(39.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text("Les plans du moments", style = MaterialTheme.typography.h4)
-                    Text("Voir tout", color = SeeMore, fontWeight = FontWeight.W700)
-                }
-                Row(
+        if(isLoaded.value){
+            item {
+                Column(
                     modifier = Modifier
-                        .padding(top = 16.dp)
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(5.dp)
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
+                        .background(BackgroundWhite)
+                        .padding(28.dp, 30.dp),
                 ) {
-                    data.forEach { list ->
-                        Column(
-                            Modifier
-                                .weight(1f)
-                        ) {
-                            list.forEach { plan ->
-                                PlanProfile(plan, true)
+                    Row(
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        categories.value.map { c ->
+                            CategoryProfile(c)
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(39.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text("Les plans du moments", style = MaterialTheme.typography.h4)
+                        Text("Voir tout", color = SeeMore, fontWeight = FontWeight.W700)
+                    }
+                    Row(
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(5.dp)
+                    ) {
+                        data.forEach { list ->
+                            Column(
+                                Modifier
+                                    .weight(1f)
+                            ) {
+                                list.forEach { plan ->
+                                    PlanProfile(plan, true)
+                                }
                             }
                         }
                     }
+                }
+            }
+        }else{
+            item{
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
+                        .background(BackgroundWhite)
+                        .padding(28.dp, 30.dp)
+                ) {
+                    Box(
+                        Modifier
+                            .height(15.dp)
+                            .fillMaxWidth()
+                            .shimmerBackground(RoundedCornerShape(4.dp))
+                    )
                 }
             }
         }

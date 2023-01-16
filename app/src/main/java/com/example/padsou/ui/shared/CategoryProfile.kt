@@ -29,13 +29,11 @@ import com.google.common.reflect.Reflection.getPackageName
 fun CategoryProfile(category: Category = Category.defaultCategory()){
 
     val context = LocalContext.current
-    val drawableId = remember(category.iconUrl) {
-        context.resources.getIdentifier(
-            category.iconUrl,
-            "drawable",
-            context.packageName
-        )
-    }
+    val drawableId = context.resources.getIdentifier(
+        category.iconUrl,
+        "drawable",
+        context.packageName
+    )
 
     Column(
         modifier = Modifier.padding(10.dp),

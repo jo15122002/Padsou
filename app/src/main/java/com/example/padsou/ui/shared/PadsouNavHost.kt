@@ -23,8 +23,10 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.OnBoarding.route
+    startDestination: String = Screen.Home.route
 ){
+    Log.d("ViewModel", "init nav host")
+
     NavHost(
         navController = navController,
         startDestination = startDestination
@@ -41,7 +43,10 @@ fun PadsouNavHost(
             SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
         }
 
-        composable(Screen.Home.route) { HomeView(navController) }
+        composable(Screen.Home.route) {
+            Log.d("ViewModel", "init composable")
+            HomeView(navController)
+        }
         composable(Screen.AddPlan.route) { AddPlanView(navController) }
         composable(Screen.Profile.route) { ProfileView(navController) }
     }

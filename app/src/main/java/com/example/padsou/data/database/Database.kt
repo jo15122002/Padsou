@@ -21,7 +21,7 @@ object Database{
         //getAllCategory()
     }
 
-    fun getAllCategory() = GlobalScope.async {
+    fun getAllCategory(onSuccess : (MutableList<Category>)->Unit) = GlobalScope.async {
         val items = mutableListOf<Category>()
 
         db.collection("category")
@@ -32,6 +32,7 @@ object Database{
                     items.add(localCategory)
                     Log.d("ViewModel", "DocumentSnapshot localCategory: $localCategory")
                 }
+                onSuccess(items)
             }
             .addOnFailureListener { }
     }

@@ -16,7 +16,7 @@ class Category (var id:String, var name: String, var color: String, var iconUrl:
                 (0..1000000).random().toString(),
                 "soon",
                 "#BFC0DF",
-                "ic_coming_soon"
+                "ic_soirees"
             )
         }
     }
