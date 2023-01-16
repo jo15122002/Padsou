@@ -1,5 +1,6 @@
 package com.example.padsou.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,8 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.core.text.buildSpannedString
 import com.example.padsou.R
+import com.example.padsou.data.database.Database
+import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import com.example.padsou.ui.shared.CategoryProfile
 import com.example.padsou.ui.shared.PlanProfile
@@ -29,13 +32,19 @@ import com.example.padsou.ui.shared.TextInput
 import com.example.padsou.ui.theme.*
 
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomePage(){
+fun HomePage(viewModel: HomeViewModel){
 
-    var text by remember {
-        mutableStateOf("")
+    val categories = remember{viewModel.categories}
+
+    LaunchedEffect(key1 = true) {
+        Log.d("ViewModel", "Loading cate")
+        viewModel.loadCategory()
+
     }
+
+    Log.d("ViewModel", "Home updated:")
+
     var data = listOf(
         listOf(
             Plan.defaultPlan(),
@@ -91,10 +100,9 @@ fun HomePage(){
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    CategoryProfile()
-                    CategoryProfile()
-                    CategoryProfile()
-                    CategoryProfile()
+                    categories.map { c ->
+                        CategoryProfile(c)
+                    }
                 }
                 Spacer(modifier = Modifier.height(39.dp))
                 Row(
@@ -125,10 +133,4 @@ fun HomePage(){
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultHomePreview() {
-    HomePage()
 }

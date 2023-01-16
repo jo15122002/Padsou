@@ -10,10 +10,12 @@ import com.example.padsou.ui.shared.Layout
 @Composable
 fun HomeView(navController: NavHostController){
 
+    val viewModel = HomeViewModel()
+
     Layout(
         navController =navController,
         content = {
-            HomePage()
+            HomePage(viewModel)
         }
     )
 }
