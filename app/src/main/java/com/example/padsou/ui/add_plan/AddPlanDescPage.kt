@@ -99,6 +99,7 @@ fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPh
             ) {
                 Text("SUIVANT", color = Color.White, style = MaterialTheme.typography.h3)
             }
+            Spacer(modifier = Modifier.height(32.dp))
         }
     }
 }
