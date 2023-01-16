@@ -26,7 +26,9 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun AddPlanView(navController: NavHostController){
     val db = Firebase.firestore
-    AddPlanDescPage()
+    Layout(content = { AddPlanDescPage(rememberNavController()) }, navController = navController)
+    //AddPlanDescPage()
+    //AddPlanPhotoPage()
 }
 
 
