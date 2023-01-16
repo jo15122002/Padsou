@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme(
                 typography = IntergralCFTypography
-            ) {
+            ){
                 PadsouNavHost()
             }
         }

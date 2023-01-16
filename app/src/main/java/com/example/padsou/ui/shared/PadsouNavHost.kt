@@ -20,7 +20,7 @@ import com.example.padsou.ui.profile.ProfileView
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Profile.route
+    startDestination: String = Screen.OnBoarding.route
 ){
     NavHost(
         navController = navController,

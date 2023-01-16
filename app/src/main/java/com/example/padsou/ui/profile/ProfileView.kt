@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.padsou.data.models.User
 import com.example.padsou.ui.home.HomePage
 import com.example.padsou.ui.shared.Layout
 
