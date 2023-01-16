@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,10 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.example.padsou.ui.shared.AddPlanStepMarker
-import com.example.padsou.ui.shared.Layout
-import com.example.padsou.ui.shared.TextInputWithTitle
-import com.example.padsou.ui.shared.TopPageTitle
+import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
 
@@ -29,6 +27,15 @@ fun AddPlanDescPage(navController: NavHostController, navigateToAddPlanPhoto : (
 
 @Composable
 fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPhoto : () -> Unit){
+    val titleInput = remember {
+        InputState()
+    }
+    val descInput = remember {
+        InputState()
+    }
+    val urlInput = remember {
+        HyperLinkState()
+    }
     Column(modifier =
     Modifier
         .background(MainPurple)
@@ -51,11 +58,39 @@ fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPh
                 AddPlanStepMarker(filled = false)
             }
             Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "Abonnement de 1 an Basic-Fit", title = "Titre")
+            InputFieldWithTitle(
+                input = titleInput.text,
+                error = titleInput.error,
+                placeholder = "Abonnement de 1 an Basic-Fit",
+                title = "Titre",
+                onInputChanged = {
+                    titleInput.text = it
+                    titleInput.validate(null)
+                }
+            )
             Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "Ne soit pas trop bavard, on s'en fout va à l'essentiel :D", height = 119.dp, title = "Description")
+            InputFieldWithTitle(
+                input = descInput.text,
+                error = descInput.error,
+                placeholder = "Ne soit pas trop bavard, on s'en fout va à l'essentiel :D",
+                title = "Description",
+                height = 119.dp,
+                onInputChanged = {
+                    descInput.text = it
+                    descInput.validate(null)
+                }
+            )
             Spacer(modifier = Modifier.height(32.dp))
-            TextInputWithTitle(placeholder = "www.lienVersTonBonPlan.com", title = "Lien")
+            HyperlinkFieldWithTitle(
+                input = urlInput.text,
+                error = urlInput.error,
+                placeholder = "www.lienVersTonBonPlan.com",
+                title = "Lien",
+                onInputChanged = {
+                    urlInput.text = it
+                    urlInput.validate(null)
+                }
+            )
             Spacer(modifier = Modifier.height(32.dp))
             Box(modifier = Modifier
                 .clickable { navigateToAddPlanPhoto() }
