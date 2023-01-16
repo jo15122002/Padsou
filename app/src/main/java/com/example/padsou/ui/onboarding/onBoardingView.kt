@@ -49,6 +49,7 @@ fun onBoardingPage(onNavigate : ()->Unit){
         ) {
             Text("C'EST PARTI !", color = Color.White, style = MaterialTheme.typography.h3)
         }*/
+
         Box(modifier = Modifier
             .clickable { onNavigate() }
             .background(MainCorail, shape = RoundedCornerShape(18.dp))
