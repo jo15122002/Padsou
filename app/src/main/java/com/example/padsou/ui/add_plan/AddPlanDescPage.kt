@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.padsou.ui.shared.AddPlanStepMarker
+import com.example.padsou.ui.shared.Layout
 import com.example.padsou.ui.shared.TextInputWithTitle
 import com.example.padsou.ui.shared.TopPageTitle
 import com.example.padsou.ui.theme.BackgroundWhite
@@ -23,6 +24,11 @@ import com.example.padsou.ui.theme.MainPurple
 
 @Composable
 fun AddPlanDescPage(navController: NavHostController, navigateToAddPlanPhoto : () -> Unit){
+    Layout(content = { AddPlanContentDescPage(navController = navController, navigateToAddPlanPhoto = navigateToAddPlanPhoto) }, navController = navController)
+}
+
+@Composable
+fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPhoto : () -> Unit){
     Column(modifier =
     Modifier
         .background(MainPurple)
