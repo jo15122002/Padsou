@@ -50,12 +50,13 @@ fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
     )
 }
 
-@Composable fun Email(email: String, error: String?, onEmailChanged : (String) -> Unit){
+@Composable fun Email(email: String, error: String?, placeholder: String = "Ton adresse e-mail" , title: String = "", onEmailChanged : (String) -> Unit){
     Column{
+        Text(title, modifier = Modifier.padding(bottom = 7.dp), style = MaterialTheme.typography.h4)
         OutlinedTextField(
             value = email,
             onValueChange = {string -> onEmailChanged(string)},
-            placeholder = { Text("Ton adresse e-mail") },
+            placeholder = { Text(placeholder) },
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
                 .fillMaxWidth()
