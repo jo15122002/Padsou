@@ -70,7 +70,7 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
                     .clickable { },
                     contentAlignment = Alignment.Center,
                 ){
-                    AsyncImage(model = "https://cdn-icons-png.flaticon.com/512/17/17128.png", contentDescription = "Ajouter une photo", modifier = Modifier.width(65.dp))
+                    Text("+", fontSize = 65.sp, color = Color.White)
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 Box(modifier = Modifier
