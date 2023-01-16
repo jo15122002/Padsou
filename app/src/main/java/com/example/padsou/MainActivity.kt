@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.TileMode
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.padsou.ui.home.HomeViewModel
 import com.example.padsou.ui.shared.PadsouNavHost
 import com.example.padsou.ui.theme.*
 import com.google.firebase.ktx.Firebase
@@ -25,11 +26,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+         val homeViewModel = HomeViewModel()
+
         setContent {
             MaterialTheme(
                 typography = IntergralCFTypography
             ) {
-                PadsouNavHost()
+                PadsouNavHost(homeViewModel)
             }
         }
     }

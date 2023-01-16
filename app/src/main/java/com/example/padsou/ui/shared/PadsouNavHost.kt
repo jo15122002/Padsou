@@ -13,6 +13,7 @@ import com.example.padsou.ui.SignIn.SignInView
 import com.example.padsou.ui.SignUp.SignUpView
 import com.example.padsou.ui.add_plan.AddPlanView
 import com.example.padsou.ui.home.HomeView
+import com.example.padsou.ui.home.HomeViewModel
 import com.example.padsou.ui.onboarding.onBoardingPage
 import com.example.padsou.ui.profile.ProfileView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,6 +23,7 @@ import com.google.firebase.ktx.Firebase
 
 @Composable
 fun PadsouNavHost(
+    homeViewModel: HomeViewModel,
     navController: NavHostController = rememberNavController(),
     startDestination: String = Screen.Home.route
 ){
@@ -45,7 +47,7 @@ fun PadsouNavHost(
 
         composable(Screen.Home.route) {
             Log.d("ViewModel", "init composable")
-            HomeView(navController)
+            HomeView(navController, homeViewModel)
         }
         composable(Screen.AddPlan.route) { AddPlanView(navController) }
         composable(Screen.Profile.route) { ProfileView(navController) }
@@ -55,5 +57,5 @@ fun PadsouNavHost(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPadsouNavHostPreview() {
-    PadsouNavHost()
+    PadsouNavHost(homeViewModel = HomeViewModel())
 }

@@ -1,21 +1,19 @@
 package com.example.padsou.ui.home
 
 import android.util.Log
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,34 +32,22 @@ import com.example.padsou.ui.theme.*
 
 
 @Composable
-fun HomePage(viewModel: HomeViewModel = HomeViewModel()){
+fun HomePage(viewModel: HomeViewModel){
 
     val categories: State<List<Category>> = viewModel.categories.collectAsState()
-    val isLoaded: State<Boolean> = viewModel.isLoaded.collectAsState()
+    val isLoadedCategory: State<Boolean> = viewModel.isLoadedCategory.collectAsState()
+    val plans: State<List<Plan>> = viewModel.plans.collectAsState()
+    val isLoadedPlan: State<Boolean> = viewModel.isLoadedPlan.collectAsState()
+    val isLoaded = isLoadedCategory.value && isLoadedPlan.value
 
     Log.d("ViewModel", "init Home page")
-
-    var data = listOf(
-        listOf(
-            Plan.defaultPlan(),
-            Plan.defaultPlan(),
-            Plan.defaultPlan(),
-            Plan.defaultPlan(),
-        ),
-        listOf(
-            Plan.defaultPlan(),
-            Plan.defaultPlan(),
-            Plan.defaultPlan(),
-        )
-    )
-
 
     LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
+                .fillMaxHeight()
                 .background(MainPurple)
                 .padding(top = 58.dp)
-
     ) {
         item{
             Column(Modifier.padding(horizontal = 33.dp)){
@@ -84,11 +70,12 @@ fun HomePage(viewModel: HomeViewModel = HomeViewModel()){
                 }
             }
         }
-        if(isLoaded.value){
+        if(isLoaded){
             item {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .fillParentMaxHeight()
                         .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
                         .background(BackgroundWhite)
                         .padding(28.dp, 30.dp),
@@ -117,7 +104,11 @@ fun HomePage(viewModel: HomeViewModel = HomeViewModel()){
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(5.dp)
                     ) {
-                        data.forEach { list ->
+                        var size = plans.value.size / 2
+                        if(size >= 3) size += 1
+                        if(size <= 1) size += 1
+                        val temp = plans.value.chunked(size)
+                        temp.forEach { list ->
                             Column(
                                 Modifier
                                     .weight(1f)
