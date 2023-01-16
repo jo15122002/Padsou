@@ -92,7 +92,7 @@ fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
 
 @Composable fun InputFieldWithTitle(input: String, error: String?, placeholder:String, title : String, height: Dp = 56.dp, onInputChanged : (String) -> Unit){
     Column{
-        Text(title, modifier = Modifier.padding(start = 35.dp, bottom = 7.dp))
+        Text(title, modifier = Modifier.padding(bottom = 7.dp), style = MaterialTheme.typography.h4)
         OutlinedTextField(
             value = input,
             onValueChange = {string -> onInputChanged(string)},
@@ -111,7 +111,7 @@ fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
 }
 @Composable fun HyperlinkFieldWithTitle(input: String, error: String?, placeholder:String, title : String, height: Dp = 56.dp, onInputChanged : (String) -> Unit){
     Column{
-        Text(title, modifier = Modifier.padding(start = 35.dp, bottom = 7.dp))
+        Text(title, modifier = Modifier.padding(bottom = 7.dp), style = MaterialTheme.typography.h4)
         OutlinedTextField(
             value = input,
             onValueChange = {string -> onInputChanged(string)},
