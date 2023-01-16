@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.padsou.data.static.Screen
+import com.example.padsou.ui.SignIn.SignInView
+import com.example.padsou.ui.SignUp.SignUpView
 import com.example.padsou.ui.add_plan.AddPlanView
 import com.example.padsou.ui.home.HomeView
 import com.example.padsou.ui.onboarding.onBoardingPage
@@ -23,8 +25,16 @@ fun PadsouNavHost(
         startDestination = startDestination
     ) {
         composable(Screen.OnBoarding.route) {
-            onBoardingPage(onNavigate = { navController.navigate(Screen.Home.route) })
+            onBoardingPage(onNavigate = { navController.navigate(Screen.SignUp.route) })
         }
+
+        composable(Screen.SignUp.route){
+            SignUpView(onNavigateToSignIn = {navController.navigate(Screen.SignIn.route)}, onNavigateToPlans = {navController.navigate(Screen.Home.route)})}
+
+        composable(Screen.SignIn.route){
+            SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
+        }
+
         composable(Screen.Home.route) { HomeView(navController) }
         composable(Screen.AddPlan.route) { AddPlanView(navController) }
         composable(Screen.Profile.route) { ProfileView(navController) }
