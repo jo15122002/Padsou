@@ -22,7 +22,7 @@ import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
 
 @Composable
-fun AddPlanDescPage(navController: NavHostController){
+fun AddPlanDescPage(navController: NavHostController, navigateToAddPlanPhoto : () -> Unit){
     Column(modifier =
     Modifier
         .background(MainPurple)
@@ -52,7 +52,7 @@ fun AddPlanDescPage(navController: NavHostController){
             TextInputWithTitle(placeholder = "www.lienVersTonBonPlan.com", title = "Lien")
             Spacer(modifier = Modifier.height(32.dp))
             Box(modifier = Modifier
-                .clickable { }
+                .clickable { navigateToAddPlanPhoto() }
                 .background(MainPurple, shape = RoundedCornerShape(18.dp))
                 .padding(horizontal = 133.dp, vertical = 18.dp)
             ) {
@@ -65,5 +65,5 @@ fun AddPlanDescPage(navController: NavHostController){
 @Preview(showBackground = true)
 @Composable
 fun DefaultAddPlanPagePreview() {
-    AddPlanDescPage(navController = rememberNavController())
+    AddPlanDescPage(navController = rememberNavController(), {})
 }

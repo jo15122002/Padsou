@@ -14,6 +14,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.padsou.ui.shared.AddPlanStepMarker
 import com.example.padsou.ui.shared.TextInputWithTitle
 import com.example.padsou.ui.shared.TopPageTitle
@@ -22,7 +24,7 @@ import com.example.padsou.ui.theme.MainPurple
 import coil.compose.AsyncImage
 
 @Composable
-fun AddPlanPhotoPage(){
+fun AddPlanPhotoPage(navController : NavHostController){
     Column(modifier =
     Modifier
         .background(MainPurple)
@@ -56,7 +58,7 @@ fun AddPlanPhotoPage(){
                     .background(MainPurple, shape = RoundedCornerShape(18.dp))
                     .width(174.dp)
                     .aspectRatio(1f)
-                    .clickable {  },
+                    .clickable { },
                     contentAlignment = Alignment.Center,
                 ){
                     AsyncImage(model = "https://cdn-icons-png.flaticon.com/512/17/17128.png", contentDescription = "Ajouter une photo", modifier = Modifier.width(65.dp))
@@ -76,5 +78,5 @@ fun AddPlanPhotoPage(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultAddPlanPhotoPagePreview() {
-    AddPlanPhotoPage()
+    AddPlanPhotoPage(rememberNavController())
 }
