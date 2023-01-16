@@ -11,11 +11,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.padsou.data.static.Screen
 import com.example.padsou.ui.shared.Layout
 
 
 @Composable
-fun HomeView(navController: NavHostController, homeViewModel: HomeViewModel){
+fun HomeView(navController: NavHostController){
 
     Log.d("ViewModel", "init home view")
 
@@ -23,7 +24,11 @@ fun HomeView(navController: NavHostController, homeViewModel: HomeViewModel){
         navController = navController,
         content = {
             Box(Modifier.fillMaxHeight()){
-                HomePage(homeViewModel)
+                HomePage(
+                    onCategoryClick = { id ->
+                        navController.navigate(Screen.PlansByCategory.route+"/"+id)
+                    }
+                )
             }
         }
     )
@@ -32,5 +37,5 @@ fun HomeView(navController: NavHostController, homeViewModel: HomeViewModel){
 @Preview(showBackground = true)
 @Composable
 fun DefaultHomeViewPreview() {
-    HomeView(navController = rememberNavController(), homeViewModel = HomeViewModel())
+    HomeView(navController = rememberNavController())
 }

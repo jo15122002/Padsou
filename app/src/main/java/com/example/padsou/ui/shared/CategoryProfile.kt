@@ -3,6 +3,7 @@ package com.example.padsou.ui.shared
 import android.graphics.drawable.Drawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -26,7 +27,7 @@ import com.google.common.reflect.Reflection.getPackageName
 
 
 @Composable
-fun CategoryProfile(category: Category = Category.defaultCategory()){
+fun CategoryProfile(category: Category = Category.defaultCategory(), onCategoryClick: (String)->Unit){
 
     val context = LocalContext.current
     val drawableId = context.resources.getIdentifier(
@@ -36,9 +37,14 @@ fun CategoryProfile(category: Category = Category.defaultCategory()){
     )
 
     Column(
-        modifier = Modifier.padding(10.dp),
+        modifier = Modifier
+            .padding(10.dp)
+            .clickable {
+               onCategoryClick(category.id)
+           }
+        ,
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(10.dp)
+        verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
         Box(
             modifier = Modifier
@@ -65,5 +71,5 @@ fun CategoryProfile(category: Category = Category.defaultCategory()){
 @Preview(showBackground = true)
 @Composable
 fun CategoryProfilePreview() {
-    CategoryProfile()
+    CategoryProfile(onCategoryClick = { })
 }

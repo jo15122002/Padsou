@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.padsou.data.database.Database
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import kotlinx.coroutines.GlobalScope
@@ -36,21 +37,19 @@ class HomeViewModel: ViewModel() {
 
     private fun loadCategories(){
         viewModelScope.launch{
-            Database.getAllCategory(onSuccess = { items ->
+            Manager.getCategories { items ->
                 _categories.value = items
                 _isLoadedCategory.value = true
-                Log.d("ViewModel", "Updated cate : $items")
-            })
+            }
         }
     }
 
     private fun loadPlans(){
         viewModelScope.launch{
-            Database.getAllPlan(onSuccess = { plans ->
-                _plans.value = plans
+            Manager.getPlans { items ->
+                _plans.value = items
                 _isLoadedPlan.value = true
-                Log.d("ViewModel", "Updated plans : $plans")
-            })
+            }
         }
     }
 
