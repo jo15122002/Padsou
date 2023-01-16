@@ -13,6 +13,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.padsou.ui.shared.AddPlanStepMarker
 import com.example.padsou.ui.shared.TextInputWithTitle
 import com.example.padsou.ui.shared.TopPageTitle
@@ -20,7 +22,7 @@ import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
 
 @Composable
-fun AddPlanDescPage(){
+fun AddPlanDescPage(navController: NavHostController){
     Column(modifier =
     Modifier
         .background(MainPurple)
@@ -63,5 +65,5 @@ fun AddPlanDescPage(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultAddPlanPagePreview() {
-    AddPlanDescPage()
+    AddPlanDescPage(navController = rememberNavController())
 }
