@@ -29,7 +29,7 @@ import com.example.padsou.R
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
-import com.google.firebase.database.core.Context
+import com.example.padsou.ui.theme.Placeholder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -81,6 +81,45 @@ fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
+                .clip(RoundedCornerShape(15.dp))
+                .background(Color.White),
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White),
+            isError = error != null
+        )
+        error?.let{ ErrorField(it) }
+    }
+}
+
+@Composable fun InputFieldWithTitle(input: String, error: String?, placeholder:String, title : String, height: Dp = 56.dp, onInputChanged : (String) -> Unit){
+    Column{
+        Text(title, modifier = Modifier.padding(start = 35.dp, bottom = 7.dp))
+        OutlinedTextField(
+            value = input,
+            onValueChange = {string -> onInputChanged(string)},
+            placeholder = { Text(placeholder) },
+            shape = RoundedCornerShape(15.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height)
+                .clip(RoundedCornerShape(15.dp))
+                .background(Color.White),
+            colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White),
+            isError = error != null
+        )
+        error?.let{ ErrorField(it) }
+    }
+}
+@Composable fun HyperlinkFieldWithTitle(input: String, error: String?, placeholder:String, title : String, height: Dp = 56.dp, onInputChanged : (String) -> Unit){
+    Column{
+        Text(title, modifier = Modifier.padding(start = 35.dp, bottom = 7.dp))
+        OutlinedTextField(
+            value = input,
+            onValueChange = {string -> onInputChanged(string)},
+            placeholder = { Text(placeholder) },
+            shape = RoundedCornerShape(15.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height)
                 .clip(RoundedCornerShape(15.dp))
                 .background(Color.White),
             colors = TextFieldDefaults.outlinedTextFieldColors(focusedBorderColor = MainPurple,unfocusedBorderColor = Color.White),
