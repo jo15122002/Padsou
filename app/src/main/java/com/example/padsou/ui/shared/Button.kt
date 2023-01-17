@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.theme.MainPurple
 import com.google.firebase.firestore.ktx.firestore
@@ -66,11 +67,14 @@ fun SignUpButton(enabled: Boolean, email: String, password: String, navigator: (
     }
 }
 
-@Composable fun saveAccountModificationButton(enabled: Boolean, text: String, context: android.content.Context) {
+@Composable fun saveAccountModificationButton(enabled: Boolean, email: String, username: String, adress: String ,text: String, context: android.content.Context) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .height(56.dp),
         onClick = {
+            if(Manager.user != null){
+                Manager.user?.modifyUser(email, username, adress, context)
+            }
         },
         colors = ButtonDefaults.buttonColors(
             backgroundColor = MainPurple,

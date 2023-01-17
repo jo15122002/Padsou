@@ -32,13 +32,14 @@ import com.example.padsou.ui.theme.SeeMore
 @Composable
 fun ProfilePage(){
 
-    val pseudo = remember { InputState() }
+    val username = remember { InputState() }
     val email = remember { EmailState() }
     val localisation = remember { InputState() }
 
     if(Manager.user != null){
-        pseudo.text = Manager.user?.username.toString()
+        username.text = Manager.user?.username.toString()
         email.text = Manager.user?.email.toString()
+        localisation.text = Manager.user?.adress.toString()
     }
 
     LazyColumn(
@@ -74,9 +75,9 @@ fun ProfilePage(){
                     Text("?", fontSize = 65.sp, color = Color.White, fontWeight = FontWeight.Bold)
                 }
 
-                InputFieldWithTitle(pseudo.text, pseudo.error,"BraddPittOfficial","Pseudo"){
-                    pseudo.text = it
-                    pseudo.validate(null)
+                InputFieldWithTitle(username.text, username.error,"BraddPittOfficial","Pseudo"){
+                    username.text = it
+                    username.validate(null)
                 };
 
                 Email(email.text, email.error, "bradd.pitt@gmail.com", "E-mail"){
@@ -91,7 +92,7 @@ fun ProfilePage(){
 
                 Box() {
                     val context = LocalContext.current
-                    saveAccountModificationButton(enabled = pseudo.isValid() && email.isValid() && (localisation.isValid() || localisation.text == ""), text = "SAUVGARDER TES INFORMATIONS", context = context )
+                    saveAccountModificationButton(enabled = username.isValid() && email.isValid() && (localisation.isValid() || localisation.text == ""), email=email.text, username = username.text, adress = localisation.text ,text = "SAUVGARDER TES INFORMATIONS", context = context )
                 }
             }
         }
