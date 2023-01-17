@@ -38,7 +38,8 @@ fun Layout(content : @Composable ()->Unit, navController: NavHostController){
 
         Scaffold(
             content = {
-                Box(Modifier.padding(bottom = 70.dp)) {
+                Box(Modifier
+                    .padding(bottom = 70.dp)) {
                     content()
                 }
             },
