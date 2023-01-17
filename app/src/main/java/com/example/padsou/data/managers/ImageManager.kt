@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import java.io.ByteArrayOutputStream
+import java.net.URL
 import java.util.*
 
 object ImageManager {
@@ -54,5 +55,18 @@ object ImageManager {
         val imageData = Base64.getDecoder().decode(string)
         val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
         return bitmap.asImageBitmap()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getDefaultProfilePictureAsBase64String():String{
+        val url = URL("https://cataas.com/cat/cute")
+        val inputStream = url.openStream()
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+        val base64 = Base64.getEncoder().encodeToString(byteArray)
+        return base64;
     }
 }

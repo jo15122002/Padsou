@@ -1,9 +1,12 @@
 package com.example.padsou.data.models
 
 import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.text.substring
+import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.managers.Manager
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -11,17 +14,23 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-data class User(var id : String, var email: String, var password: String, var username: String = "" , var adress: String = "") {
+data class User(var id : String, var email: String, var password: String, var username: String = "" , var adress: String = "", var profilePic:String) {
 
-    constructor(email: String, password: String) : this(defaultUser().id, email, password)
-    constructor() : this(defaultUser().id,defaultUser().email, defaultUser().password)
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor(email: String, password: String) : this(defaultUser().id, email, password, profilePic = defaultUser().profilePic)
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor(email: String, password: String, username:String) : this(defaultUser().id, email, password, username = username, profilePic = defaultUser().profilePic)
+    @RequiresApi(Build.VERSION_CODES.O)
+    constructor() : this(defaultUser().email, defaultUser().password)
 
     companion object {
+        @RequiresApi(Build.VERSION_CODES.O)
         fun defaultUser(): User{
-            return User("fnjgihjege2gnj3154","romain.lucas@lerperlier.com", "joyce", "romain.lucas", "")
+            return User("fnjgihjege2gnj3154","romain.lucas@lerperlier.com", "joyce", "romain.lucas", "", ImageManager.getDefaultProfilePictureAsBase64String())
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun addNewUser(navigator: ()->Unit, context: android.content.Context){
         val db = Firebase.firestore
         val userRef = db.collection("users")
