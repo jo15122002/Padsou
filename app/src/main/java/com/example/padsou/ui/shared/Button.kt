@@ -71,13 +71,13 @@ fun SignUpButton(enabled: Boolean, email: String, password: String, navigator: (
     }
 }
 
-@Composable fun saveAccountModificationButton(enabled: Boolean, email: String, username: String, adress: String ,text: String, context: android.content.Context) {
+@Composable fun saveAccountModificationButton(enabled: Boolean, email: String, username: String, adress: String, text: String, base64ProfilePic:String, context: android.content.Context) {
     Button(modifier = Modifier
         .fillMaxWidth()
         .height(56.dp),
         onClick = {
             if(Manager.user != null){
-                Manager.user?.modifyUser(email, username, adress, context)
+                Manager.user?.modifyUser(email, username, adress, base64ProfilePic, context)
             }
         },
         colors = ButtonDefaults.buttonColors(

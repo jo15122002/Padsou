@@ -1,6 +1,8 @@
 package com.example.padsou.ui.profile
 
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,10 +19,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
@@ -33,20 +35,31 @@ import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.SeeMore
 
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun ProfilePage(){
 
+    val context = LocalContext.current
     val username = remember { InputState() }
     val email = remember { EmailState() }
     val localisation = remember { InputState() }
     var profilePic = ImageManager.decodeBase64ToImageBitmap(User.defaultUser().profilePic)
+    var newProfilePic by remember { mutableStateOf("") }
+
+    val galleryLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetContent(), onResult = {
+            uri ->
+
+        newProfilePic = ImageManager.encodeImageUriToBase64String(uri!!, context);
+
+    })
 
     if(Manager.user != null){
         username.text = Manager.user?.username.toString()
         email.text = Manager.user?.email.toString()
         localisation.text = Manager.user?.adress.toString()
-        profilePic = ImageManager.decodeBase64ToImageBitmap(Manager.user?.profilePic.toString())
+        if (!Manager.user?.profilePic.toString().isEmpty()){
+            profilePic = ImageManager.decodeBase64ToImageBitmap(Manager.user?.profilePic.toString())
+        }
     }
 
     LazyColumn(
@@ -74,12 +87,14 @@ fun ProfilePage(){
                 Image(
                     bitmap = profilePic,
                     contentDescription = "",
+                    contentScale = ContentScale.Crop,
                     modifier = Modifier
                     .background(Color(0xFFE3E3E3), shape = RoundedCornerShape(100.dp))
                     .width(150.dp)
                     .aspectRatio(1f)
                     .clip(RoundedCornerShape(75.dp))
                     .clickable {
+                        galleryLauncher.launch("image/*")
                     },
                 )
 
@@ -99,15 +114,14 @@ fun ProfilePage(){
                 };
 
                 Box() {
-                    val context = LocalContext.current
-                    saveAccountModificationButton(enabled = username.isValid() && email.isValid() && (localisation.isValid() || localisation.text == ""), email=email.text, username = username.text, adress = localisation.text ,text = "SAUVGARDER TES INFORMATIONS", context = context )
+                    saveAccountModificationButton(enabled = username.isValid() && email.isValid() && (localisation.isValid() || localisation.text == ""), email=email.text, username = username.text, adress = localisation.text , base64ProfilePic = newProfilePic, text = "SAUVGARDER TES INFORMATIONS", context = context )
                 }
             }
         }
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
+@RequiresApi(Build.VERSION_CODES.P)
 @Preview(showBackground = true)
 @Composable
 fun ProfilePagePreview() {

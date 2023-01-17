@@ -76,16 +76,17 @@ data class User(var id : String, var email: String, var password: String, var us
             }
     }
 
-    fun modifyUser(newEmail : String?, newUsername : String?, newAdress : String? ,context: android.content.Context){
+    fun modifyUser(newEmail : String?, newUsername : String?, newAdress : String? , newProfilePic:String, context: android.content.Context){
         val db = Firebase.firestore
         val allUsers = db.collection("users")
 
         val userEmailUpdateQuery = allUsers.document(this.id).update("email", newEmail.toString())
         val userUsernameUpdateQuery = allUsers.document(this.id).update("username", newUsername.toString())
         val userAdressUpdateQuery = allUsers.document(this.id).update("adress", newAdress.toString())
+        val userProfilePicUpdateQuery = allUsers.document(this.id).update("profilePic", newProfilePic)
 
         allUsers
-            .whereEqualTo("password", this.password)
+            .whereEqualTo("email", this.email)
             .get()
             .addOnSuccessListener { users ->
                 if(!users.isEmpty){
@@ -104,6 +105,12 @@ data class User(var id : String, var email: String, var password: String, var us
                         if(newAdress != null){
                             userAdressUpdateQuery.addOnSuccessListener{
                                 Manager.user?.adress = newAdress.toString();
+                            }
+                        }
+                            println("***" + newProfilePic)
+                        if(!newProfilePic.isEmpty()){
+                            userProfilePicUpdateQuery.addOnSuccessListener{
+                                Manager.user?.profilePic = newProfilePic;
                             }
                         }
                     }
