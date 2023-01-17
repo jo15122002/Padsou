@@ -83,7 +83,7 @@ fun SignUpButton(enabled: Boolean, email: String, password: String, navigator: (
         shape = RoundedCornerShape(18.dp),
         enabled = enabled
     ) {
-        Text(text, color = Color.White, style = MaterialTheme.typography.h3)
+        Text(text, color = Color.White, style = MaterialTheme.typography.h4)
     }
 }
 

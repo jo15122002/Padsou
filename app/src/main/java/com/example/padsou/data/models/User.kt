@@ -66,7 +66,6 @@ data class User(var id : String, var email: String, var password: String, var us
                 if (!users.isEmpty){
                     Manager.user = users.first().toObject<User>()
                     Manager.user?.id = users.first().id
-                    Log.d("***", Manager.user!!.id)
                     navigator()
                     Toast.makeText(context, "Connexion réussi 🔥", Toast.LENGTH_LONG).show()
                 }
