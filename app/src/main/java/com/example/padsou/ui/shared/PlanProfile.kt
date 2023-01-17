@@ -1,6 +1,7 @@
 package com.example.padsou.ui.shared
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import com.example.padsou.ui.onboarding.onBoardingSlider
@@ -26,9 +27,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.models.Plan
+import com.example.padsou.data.static.Screen
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.TextBlack
@@ -37,13 +41,17 @@ import com.example.padsou.ui.theme.TextBlack
 @Composable
 fun PlanProfile(
     plan: Plan = Plan.defaultPlan(),
-    isBig: Boolean = false
+    isBig: Boolean = false,
+    onPlanClick: (id: String)->Unit
 ){
     var height = 105.dp
     if(isBig) height = 150.dp
 
     Card(
         modifier = Modifier
+            .clickable {
+                onPlanClick(plan.id)
+            }
             .padding(4.dp)
             .height(height)
             .then(
@@ -122,5 +130,5 @@ fun PlanProfile(
 @Preview(showBackground = true)
 @Composable
 fun DefaultPlanProfilePreview() {
-    PlanProfile()
+    PlanProfile(onPlanClick = {})
 }

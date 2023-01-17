@@ -29,7 +29,7 @@ import com.example.padsou.ui.theme.*
 
 
 @Composable
-fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (String)->Unit){
+fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (String)->Unit, onPlanClick: (String)->Unit){
 
     val showSearchView:State<Boolean> = viewModel.showSearchView.collectAsState()
     val isLoadedCategory: State<Boolean> = viewModel.isLoadedCategory.collectAsState()
@@ -87,7 +87,7 @@ fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (Strin
                     if(showSearchView.value){
                         HomeSearchView(viewModel)
                     }else {
-                        DefaultHomeView(viewModel, onCategoryClick)
+                        DefaultHomeView(viewModel, onCategoryClick, onPlanClick)
                     }
                 }
             }

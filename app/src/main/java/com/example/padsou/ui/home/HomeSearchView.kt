@@ -1,5 +1,7 @@
 package com.example.padsou.ui.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,11 +22,12 @@ import com.example.padsou.ui.shared.ListPlanProfile
 import com.example.padsou.ui.theme.MainPurple
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeSearchView(viewModel: HomeViewModel){
 
     val searchPlans: State<List<Plan>> = viewModel.searchPlans.collectAsState()
 
-    ListPlanProfile(searchPlans.value)
+    ListPlanProfile(searchPlans.value, onPlanClick = {})
 
 }

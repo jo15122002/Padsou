@@ -78,4 +78,16 @@ object Manager {
         }
     }
 
+    fun getPlan(id:String, onGet : (Plan)->Unit){
+        if(plans.value.size == 0){
+            loadPlans { items ->
+                val temp = items.first{it.id == id}
+                onGet(temp)
+            }
+        }else{
+            val temp = _plans.value.first{it.id == id}
+            onGet(temp)
+        }
+    }
+
 }

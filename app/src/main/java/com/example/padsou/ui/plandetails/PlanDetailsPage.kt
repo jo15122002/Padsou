@@ -2,6 +2,10 @@ package com.example.padsou.ui.plandetails
 
 import android.content.ClipData.Item
 import android.graphics.Paint.Align
+import android.os.Build
+import android.telecom.Call.Details
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -11,8 +15,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,15 +32,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.managers.Manager
+import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
+import kotlinx.coroutines.flow.MutableStateFlow
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
+fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
+
+    val plan: State<Plan> = viewModel.plan.collectAsState()
+    var count by remember { mutableStateOf(plan.value.utilisationCount) }
 
     LazyColumn(
         Modifier
@@ -48,10 +58,8 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
             Box(
                 Modifier.clip(RoundedCornerShape(bottomStart = 35.dp, bottomEnd = 35.dp))
             ) {
-                AsyncImage(
-                    model = plan.photoUrl,
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
+                Image(bitmap = ImageManager.decodeBase64ToImageBitmap(plan.value.base64Images[0]),
+                    contentDescription = "",
                     modifier = Modifier
                         .drawWithCache {
                             val gradient = Brush.horizontalGradient(
@@ -74,7 +82,7 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
                         .padding(top = 120.dp),
                         horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    Text(plan.title, color = Color.White, style = MaterialTheme.typography.h2)
+                    Text(plan.value.title, color = Color.White, style = MaterialTheme.typography.h2)
                 }
             }
         }
@@ -101,7 +109,7 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
                                 Text("Killian74", fontSize = 10.sp)
                             }
                         }
-                        Text(plan.description)
+                        Text(plan.value.description)
                     }
                 }
             }
@@ -110,7 +118,7 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
                 Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Testé par 32 galériens", style = MaterialTheme.typography.h4, textAlign = TextAlign.Center)
+                Text("Testé par ${count} galériens", style = MaterialTheme.typography.h4, textAlign = TextAlign.Center)
             }
 
             Column(
@@ -123,7 +131,9 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
                 val uriHandler = LocalUriHandler.current
                 Button(
                     onClick = {
-                        uriHandler.openUri(plan.link)
+                        //uriHandler.openUri(plan.link)
+                        count ++
+                        plan.value.updateUtilisationCount(count)
                     },
                     shape = RoundedCornerShape(15.dp),
                     contentPadding = PaddingValues(horizontal = 70.dp, vertical = 18.dp),
@@ -141,8 +151,9 @@ fun PlanDetailsPage(plan: Plan = Plan.defaultPlan(),){
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun PlanDetailsPagePreview() {
-    PlanDetailsPage()
+    PlanDetailsPage(PlanDetailsViewModel())
 }

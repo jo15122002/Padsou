@@ -1,5 +1,11 @@
 package com.example.padsou.data.models
 
+import android.util.Log
+import com.example.padsou.data.managers.Manager
+import com.google.firebase.database.ktx.database
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 class Plan(
     var id:String,
     var title: String = "",
@@ -9,7 +15,8 @@ class Plan(
     var link:String = "",
     var userId: String = "",
     var categoryId:String = "",
-    var base64Images:List<String> = listOf()
+    var base64Images:List<String> = listOf(),
+    var utilisationCount:Int=0
     ){
 
     constructor() : this(defaultPlan().id, defaultPlan().title, defaultPlan().description, defaultPlan().photoUrl, defaultPlan().logoUrl, defaultPlan().link, defaultPlan().userId,defaultPlan().categoryId, defaultPlan().base64Images)
@@ -25,7 +32,7 @@ class Plan(
                 "https://www.maspatule.com/blog/2021/07/26/recette-tacos-mexicain/",
                 "0",
                 "0",
-                listOf("tets", "test")
+                listOf(image, "test"),
             )
         }
     }
@@ -34,4 +41,9 @@ class Plan(
         return "Plan(title='$title')"
     }
 
+    fun updateUtilisationCount(count : Int){
+        var db = Firebase.firestore
+        var tablePlan = db.collection("plans")
+        tablePlan.document(this.id).update("utilisationCount", count)
+    }
 }

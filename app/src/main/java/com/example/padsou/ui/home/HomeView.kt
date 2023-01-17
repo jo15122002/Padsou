@@ -27,6 +27,9 @@ fun HomeView(navController: NavHostController){
                 HomePage(
                     onCategoryClick = { id ->
                         navController.navigate(Screen.PlansByCategory.route+"/"+id)
+                    },
+                    onPlanClick = { id ->
+                        navController.navigate(Screen.PlanDetails.route+"/"+id)
                     }
                 )
             }

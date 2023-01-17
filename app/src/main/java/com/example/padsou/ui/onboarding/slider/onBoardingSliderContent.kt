@@ -1,5 +1,7 @@
 package com.example.padsou.ui.onboarding.slider
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -16,6 +18,7 @@ import com.example.padsou.ui.shared.SliderCheckmark
 
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun onBoardingSliderContent(){
 
@@ -27,14 +30,14 @@ fun onBoardingSliderContent(){
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile()
-            PlanProfile()
+            PlanProfile(onPlanClick = {})
+            PlanProfile(onPlanClick = {})
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile()
-            PlanProfile()
+            PlanProfile(onPlanClick = {})
+            PlanProfile(onPlanClick = {})
         }
     }
 
@@ -42,6 +45,7 @@ fun onBoardingSliderContent(){
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultOnBoardingSliderPreview() {

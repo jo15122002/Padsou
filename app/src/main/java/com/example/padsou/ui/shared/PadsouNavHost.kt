@@ -29,14 +29,15 @@ import com.example.padsou.ui.profile.ProfileView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlin.math.log
 
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.PlanDetails.route
-    //startDestination: String = Screen.OnBoarding.route
+    //startDestination: String = Screen.PlanDetails.route
+    startDestination: String = Screen.Home.route
 ){
     Log.d("ViewModel", "init nav host")
 
@@ -55,15 +56,17 @@ fun PadsouNavHost(
             SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
         }
 
-        composable(Screen.PlanDetails.route){ PlanDetailsView(navController)}
-
         composable(Screen.AddPlan.route) { AddPlanDescPage(navController, { navController.navigate(Screen.AddPlanPhoto.route) }) }
+
         composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
+
         composable(Screen.Home.route) {
             Log.d("ViewModel", "init composable")
             HomeView(navController)
         }
+
         composable(Screen.Profile.route) { ProfileView(navController) }
+
         composable(
             Screen.PlansByCategory.route +"/{categoryId}",
             arguments = listOf(navArgument("categoryId") { type = NavType.StringType })
@@ -72,6 +75,13 @@ fun PadsouNavHost(
             PlansByCategoriesView(navController, categoryId)
         }
 
+        composable(
+            Screen.PlanDetails.route +"/{planId}",
+            arguments = listOf(navArgument("planId") { type = NavType.StringType })
+        ){ backStackEntry ->
+            val planId = backStackEntry.arguments?.getString("planId")
+            PlanDetailsView(navController, planId)
+        }
     }
 }
 
