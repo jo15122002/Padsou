@@ -33,7 +33,7 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Home.route
+    startDestination: String = Screen.OnBoarding.route
 ){
     Log.d("ViewModel", "init nav host")
 
