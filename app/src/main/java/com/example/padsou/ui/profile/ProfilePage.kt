@@ -1,5 +1,8 @@
 package com.example.padsou.ui.profile
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.shared.*
@@ -29,17 +33,20 @@ import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.SeeMore
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ProfilePage(){
 
     val username = remember { InputState() }
     val email = remember { EmailState() }
     val localisation = remember { InputState() }
+    var profilePic = ImageManager.decodeBase64ToImageBitmap(User.defaultUser().profilePic)
 
     if(Manager.user != null){
         username.text = Manager.user?.username.toString()
         email.text = Manager.user?.email.toString()
         localisation.text = Manager.user?.adress.toString()
+        profilePic = ImageManager.decodeBase64ToImageBitmap(Manager.user?.profilePic.toString())
     }
 
     LazyColumn(
@@ -64,16 +71,17 @@ fun ProfilePage(){
                     verticalArrangement = Arrangement.spacedBy(30.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(modifier = Modifier
+                Image(
+                    bitmap = profilePic,
+                    contentDescription = "",
+                    modifier = Modifier
                     .background(Color(0xFFE3E3E3), shape = RoundedCornerShape(100.dp))
                     .width(150.dp)
                     .aspectRatio(1f)
+                    .clip(RoundedCornerShape(75.dp))
                     .clickable {
                     },
-                    contentAlignment = Alignment.Center,
-                ){
-                    Text("?", fontSize = 65.sp, color = Color.White, fontWeight = FontWeight.Bold)
-                }
+                )
 
                 InputFieldWithTitle(username.text, username.error,"BraddPittOfficial","Pseudo"){
                     username.text = it
@@ -99,6 +107,7 @@ fun ProfilePage(){
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun ProfilePagePreview() {
