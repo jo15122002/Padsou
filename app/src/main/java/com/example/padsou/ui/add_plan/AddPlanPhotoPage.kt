@@ -51,7 +51,7 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
-fun AddPlanPhotoPage(navController : NavHostController, viewModel : AddPlanPhotoPageViewModel){
+fun AddPlanPhotoPage(navController : NavHostController){
     Layout(content = { AddPlanPhotoContentPage(navController = navController) }, navController = navController)
 }
 
@@ -158,5 +158,5 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
 @Preview(showBackground = true)
 @Composable
 fun DefaultAddPlanPhotoPagePreview() {
-    AddPlanPhotoPage(rememberNavController(), AddPlanPhotoPageViewModel)
+    AddPlanPhotoPage(rememberNavController())
 }
