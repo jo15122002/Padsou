@@ -51,11 +51,8 @@ object ImageManager {
     @RequiresApi(Build.VERSION_CODES.O)
     fun decodeBase64ToImageBitmap(string:String): ImageBitmap
     {
-        Log.d("((TAG", "decodeBase64ToImageBitmap: $string")
         val imageData = Base64.getDecoder().decode(string)
-        Log.d("((TAG", "decodeBase64ToImageBitmap: $imageData")
         val bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.size)
-        Log.d("((TAG", "decodeBase64ToImageBitmap: $bitmap")
         return bitmap.asImageBitmap()
     }
 }
