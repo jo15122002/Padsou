@@ -1,6 +1,8 @@
 package com.example.padsou.ui.plansbycategories
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -33,6 +35,7 @@ import com.example.padsou.ui.theme.MainPurple
 import kotlin.math.ceil
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategoriesViewModel){
 
@@ -81,7 +84,7 @@ fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategories
                     .padding(28.dp, 30.dp)
             ) {
                 Log.d("viewModel", "plans.value.size ${plans.value.size}")
-                ListPlanProfile(plans.value)
+                ListPlanProfile(plans.value, onPlanClick = {})
             }
         }
 
@@ -90,6 +93,7 @@ fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategories
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPlansByCategoriesPagePreview() {

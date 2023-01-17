@@ -1,11 +1,11 @@
 package com.example.padsou.ui.shared
 
+import android.os.Build
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.*
 import com.example.padsou.ui.onboarding.onBoardingSlider
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -27,22 +27,31 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
+import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.models.Plan
+import com.example.padsou.data.static.Screen
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.TextBlack
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlanProfile(
     plan: Plan = Plan.defaultPlan(),
-    isBig: Boolean = false
+    isBig: Boolean = false,
+    onPlanClick: (id: String)->Unit
 ){
     var height = 105.dp
     if(isBig) height = 150.dp
 
     Card(
         modifier = Modifier
+            .clickable {
+                onPlanClick(plan.id)
+            }
             .padding(4.dp)
             .height(height)
             .then(
@@ -66,23 +75,29 @@ fun PlanProfile(
                     Modifier
                         .padding(bottom = 15.dp)
                 ) {
-                    AsyncImage(
-                        model = plan.photoUrl,
-                        contentDescription = null,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .then(
-                                if (isBig)
-                                    Modifier
-                                        .clip(RoundedCornerShape(10.dp))
-                                        .height(height * 3 / 5)
-                                else
-                                    Modifier
-                                        .clip(RoundedCornerShape(6.dp))
-                                        .height(height / 2)
-                            )
-                            .fillMaxSize()
-                    )
+                    if(!plan.base64Images.isEmpty() && plan.base64Images[0].startsWith("/9j/")){
+                        Image(
+                            bitmap = ImageManager.decodeBase64ToImageBitmap(plan.base64Images[0]),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .then(
+                                    if (isBig)
+                                        Modifier
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .height(height * 3 / 5)
+                                    else
+                                        Modifier
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .height(height / 2)
+                                )
+                                .fillMaxSize()
+                        )
+                    }else{
+                        AsyncImage(
+                            model = plan.photoUrl,
+                            contentDescription = "")
+                    }
                 }
                 Card(
                     shape = CircleShape,
@@ -111,8 +126,9 @@ fun PlanProfile(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPlanProfilePreview() {
-    PlanProfile()
+    PlanProfile(onPlanClick = {})
 }

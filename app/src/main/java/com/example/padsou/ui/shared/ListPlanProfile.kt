@@ -1,6 +1,8 @@
 package com.example.padsou.ui.shared
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.ui.unit.dp
 import com.example.padsou.data.models.Plan
@@ -12,8 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import kotlin.math.ceil
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun ListPlanProfile(plans: List<Plan>){
+fun ListPlanProfile(plans: List<Plan>, onPlanClick: (id: String)->Unit){
 
 
     var size = ceil((plans.size / 2).toDouble())
@@ -33,7 +36,7 @@ fun ListPlanProfile(plans: List<Plan>){
                     .weight(1f)
             ) {
                 list.forEach { plan ->
-                    PlanProfile(plan, true)
+                    PlanProfile(plan, true, onPlanClick)
                 }
             }
         }
@@ -47,8 +50,9 @@ fun ListPlanProfile(plans: List<Plan>){
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultListPlanProfilePreview() {
-    ListPlanProfile(listOf())
+    ListPlanProfile(listOf(), onPlanClick = {})
 }
