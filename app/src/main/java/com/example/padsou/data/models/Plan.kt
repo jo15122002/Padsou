@@ -1,6 +1,7 @@
 package com.example.padsou.data.models
 
 class Plan(
+    var id:String,
     var title: String = "",
     var description: String = "",
     var photoUrl: String = "",
@@ -10,9 +11,8 @@ class Plan(
     var categoryId:String = "",
     var base64Images:List<String> = listOf()
     ){
-class Plan (var id: String, var title: String, var description: String, var photoUrl: String,var logoUrl: String,  var link:String, var userId: String, var categoryId:String){
 
-    constructor() : this(defaultPlan().id, defaultPlan().title, defaultPlan().description, defaultPlan().photoUrl, defaultPlan().logoUrl, defaultPlan().link, defaultPlan().userId, defaultPlan().categoryId)
+    constructor() : this(defaultPlan().id, defaultPlan().title, defaultPlan().description, defaultPlan().photoUrl, defaultPlan().logoUrl, defaultPlan().link, defaultPlan().userId,defaultPlan().categoryId, defaultPlan().base64Images)
 
     companion object {
         fun defaultPlan(): Plan{
