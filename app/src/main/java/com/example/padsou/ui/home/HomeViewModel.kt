@@ -28,6 +28,14 @@ class HomeViewModel: ViewModel() {
     private val _isLoadedPlan = MutableStateFlow(true)
     val isLoadedPlan = _isLoadedPlan.asStateFlow()
 
+    private val _showSearchView = MutableStateFlow(false)
+    val showSearchView = _showSearchView.asStateFlow()
+
+    private var searchValue = ""
+
+    private val _searchPlans = MutableStateFlow<MutableList<Plan>>(mutableListOf())
+    val searchPlans = _searchPlans.asStateFlow()
+
 
     init {
         Log.d("ViewModel", "Loading cate")
@@ -50,6 +58,26 @@ class HomeViewModel: ViewModel() {
                 _plans.value = items
                 _isLoadedPlan.value = true
             }
+        }
+    }
+
+    fun search(value : String){
+        searchValue = value
+        _isLoadedPlan.value = false
+
+        viewModelScope.launch{
+            Manager.getPlans(searchValue) { items ->
+                _searchPlans.value = items
+                _isLoadedPlan.value = true
+            }
+        }
+
+        _showSearchView.value = searchValue.isNotEmpty()
+    }
+
+    fun setLoadedPlan(value: Boolean){
+        if(_isLoadedPlan.value != value) {
+            _isLoadedPlan.value = value
         }
     }
 
