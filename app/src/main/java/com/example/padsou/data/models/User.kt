@@ -11,13 +11,14 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 
-data class User(var email: String, var password: String, val username: String = "" , val adress: String = "") {
+data class User(var id : String, var email: String, var password: String, var username: String = "" , var adress: String = "") {
 
-    constructor() : this(defaultUser().email, defaultUser().password, defaultUser().adress)
+    constructor(email: String, password: String) : this(defaultUser().id, email, password)
+    constructor() : this(defaultUser().id,defaultUser().email, defaultUser().password)
 
     companion object {
         fun defaultUser(): User{
-            return User("romain.lucas@lerperlier.com", "joyce", "romain.lucas", "156 route de vache, Paris")
+            return User("fnjgihjege2gnj3154","romain.lucas@lerperlier.com", "joyce", "romain.lucas", "")
         }
     }
 
@@ -28,7 +29,7 @@ data class User(var email: String, var password: String, val username: String = 
         userRef.whereEqualTo("email", this.email)
             .get()
             .addOnSuccessListener { users ->
-                if(users.count() == 0){
+                if(users.isEmpty){
                     val username = this.email.substringBefore('@')
                     val userToAdd = User(this.email, this.password, username)
                     userRef.add(userToAdd)
@@ -49,12 +50,14 @@ data class User(var email: String, var password: String, val username: String = 
         val allUsers = db.collection("users")
 
         allUsers
-            .whereEqualTo("email", email)
-            .whereEqualTo("password", password)
+            .whereEqualTo("email", this.email)
+            .whereEqualTo("password", this.password)
             .get()
             .addOnSuccessListener { users ->
-                if (users.count() > 0){
+                if (!users.isEmpty){
                     Manager.user = users.first().toObject<User>()
+                    Manager.user?.id = users.first().id
+                    Log.d("***", Manager.user!!.id)
                     navigator()
                     Toast.makeText(context, "Connexion réussi 🔥", Toast.LENGTH_LONG).show()
                 }
@@ -64,9 +67,39 @@ data class User(var email: String, var password: String, val username: String = 
             }
     }
 
-    fun modifyUser(context: android.content.Context){
+    fun modifyUser(newEmail : String?, newUsername : String?, newAdress : String? ,context: android.content.Context){
         val db = Firebase.firestore
         val allUsers = db.collection("users")
+
+        val userEmailUpdateQuery = allUsers.document(this.id).update("email", newEmail.toString())
+        val userUsernameUpdateQuery = allUsers.document(this.id).update("username", newUsername.toString())
+        val userAdressUpdateQuery = allUsers.document(this.id).update("adress", newAdress.toString())
+
+        allUsers
+            .whereEqualTo("password", this.password)
+            .get()
+            .addOnSuccessListener { users ->
+                if(!users.isEmpty){
+                        if(newEmail != null){
+                            userEmailUpdateQuery.addOnSuccessListener {
+                                Manager.user?.email = newEmail.toString();
+                                Toast.makeText(context, "Données mise à jour ✌", Toast.LENGTH_LONG).show()
+                        }
+
+                        if(newUsername != null){
+                            userUsernameUpdateQuery.addOnSuccessListener{
+                                Manager.user?.username = newUsername.toString();
+                            }
+                        }
+
+                        if(newAdress != null){
+                            userAdressUpdateQuery.addOnSuccessListener{
+                                Manager.user?.adress = newAdress.toString();
+                            }
+                        }
+                    }
+                }
+            }
     }
 
 }
