@@ -51,7 +51,7 @@ import java.util.*
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
-fun AddPlanPhotoPage(navController : NavHostController){
+fun AddPlanPhotoPage(navController : NavHostController, viewModel : AddPlanPhotoPageViewModel){
     Layout(content = { AddPlanPhotoContentPage(navController = navController) }, navController = navController)
 }
 
@@ -61,24 +61,14 @@ fun AddPlanPhotoPage(navController : NavHostController){
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun AddPlanPhotoContentPage(navController : NavHostController){
+    val viewModel = AddPlanPhotoPageViewModel
     val context = LocalContext.current
-    val viewModel = AddPlanPhotoPageViewModel()
     val selectedImages : State<List<Uri>> = viewModel.selectedImages.collectAsState()
 
     val galleryLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.GetMultipleContents(), onResult = {
         uriList ->
 
         viewModel.changeSelectedImages(uriList)
-
-        /*val source = ImageDecoder.createSource(context.contentResolver, selectedImages.value[0])
-        var bitmap = ImageDecoder.decodeBitmap(source)
-        var stream = ByteArrayOutputStream();
-        var compressed = bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        var bytes = stream.toByteArray()
-        var base64Image = Base64.getEncoder().encodeToString(bytes)
-
-        println("***" + selectedImages.value[0])
-        println("***$base64Image")*/
     })
 
 
@@ -146,6 +136,13 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
                     .background(MainPurple, shape = RoundedCornerShape(18.dp))
                     .width(313.dp)
                     .height(70.dp)
+                    .clickable {
+                        viewModel.encodeImageListToBase64(
+                            context,
+                            selectedImages.value
+                        )
+                        viewModel.uploadPlan()
+                    }
                     ,
                     contentAlignment = Alignment.Center
                     ) {
@@ -161,5 +158,5 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
 @Preview(showBackground = true)
 @Composable
 fun DefaultAddPlanPhotoPagePreview() {
-    AddPlanPhotoPage(rememberNavController())
+    AddPlanPhotoPage(rememberNavController(), AddPlanPhotoPageViewModel)
 }
