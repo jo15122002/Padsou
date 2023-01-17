@@ -1,6 +1,8 @@
 package com.example.padsou.ui.shared
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NamedNavArgument
@@ -27,6 +29,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
@@ -67,6 +70,7 @@ fun PadsouNavHost(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.P)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPadsouNavHostPreview() {
