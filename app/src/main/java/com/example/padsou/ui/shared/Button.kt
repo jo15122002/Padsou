@@ -1,8 +1,10 @@
 package com.example.padsou.ui.shared
 
 import android.content.ContentValues.TAG
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,6 +26,7 @@ import kotlinx.coroutines.delay
 import java.util.*
 import java.util.logging.Handler
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignInButton(enabled: Boolean, email: String, password:String, navigator: ()->Unit, context: android.content.Context ){
     Button(
@@ -45,6 +48,7 @@ fun SignInButton(enabled: Boolean, email: String, password:String, navigator: ()
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpButton(enabled: Boolean, email: String, password: String, navigator: ()->Unit, context: android.content.Context){
     Button(
