@@ -1,6 +1,7 @@
 package com.example.padsou.ui.shared
 
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NamedNavArgument
@@ -30,7 +31,7 @@ import com.google.firebase.ktx.Firebase
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Home.route
+    startDestination: String = Screen.OnBoarding.route
 ){
     Log.d("ViewModel", "init nav host")
 
@@ -43,17 +44,27 @@ fun PadsouNavHost(
         }
 
         composable(Screen.SignUp.route){
-            SignUpView(onNavigateToSignIn = {navController.navigate(Screen.SignIn.route)}, onNavigateToPlans = {navController.navigate(Screen.Home.route)})}
+            SignUpView(onNavigateToSignIn = {navController.navigate(Screen.SignIn.route)}, onNavigateToPlans = {navController.navigate(Screen.Home.route)})
+        }
 
         composable(Screen.SignIn.route){
             SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
         }
 
-        composable(Screen.AddPlan.route) { AddPlanDescPage(navController, { navController.navigate(Screen.AddPlanPhoto.route) }) }
+        composable(Screen.AddPlan.route) { AddPlanDescPage(navController) {
+            navController.navigate(
+                Screen.AddPlanPhoto.route
+            )
+        }
+        }
         composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
         composable(Screen.Home.route) {
+            BackHandler(true) {
+                
+            }
             Log.d("ViewModel", "init composable")
             HomeView(navController)
+            
         }
         composable(Screen.Profile.route) { ProfileView(navController) }
         composable(

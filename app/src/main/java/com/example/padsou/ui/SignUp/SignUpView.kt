@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
