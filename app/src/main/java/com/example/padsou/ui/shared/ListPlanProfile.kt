@@ -17,9 +17,10 @@ fun ListPlanProfile(plans: List<Plan>){
 
 
     var size = ceil((plans.size / 2).toDouble())
-    if(size >= 3) size += 1
+    if(plans.size >= 3) size += 1
     if(plans.size <= 1) size += 1
     val temp = plans.chunked(size.toInt())
+
     Row(
         modifier = Modifier
             .padding(top = 16.dp)

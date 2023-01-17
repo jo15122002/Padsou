@@ -1,6 +1,7 @@
 package com.example.padsou.data.managers
 
 import android.util.Log
+import androidx.compose.ui.text.toLowerCase
 import com.example.padsou.data.database.Database
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
@@ -59,4 +60,22 @@ object Manager {
             onGet(_plans.value)
         }
     }
+
+    fun getPlans(key:String, onGet: (MutableList<Plan>)->Unit){
+
+        val key = key.lowercase()
+
+        if(plans.value.size == 0){
+            loadPlans { items ->
+                val temp = items.filter { plan->
+                    plan.title.lowercase().contains(key)
+                } as MutableList<Plan>
+                onGet(temp)
+            }
+        }else{
+            val temp = _plans.value.filter { it.title.lowercase().contains(key) } as MutableList<Plan>
+            onGet(temp)
+        }
+    }
+
 }
