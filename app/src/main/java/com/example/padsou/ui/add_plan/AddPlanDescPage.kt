@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Plan
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
@@ -32,6 +33,12 @@ fun AddPlanDescPage(navController: NavHostController, navigateToAddPlanPhoto : (
 @Composable
 fun AddPlanContentDescPage(navController: NavHostController, navigateToAddPlanPhoto : () -> Unit){
     val viewModel = AddPlanPhotoPageViewModel
+    var plan = viewModel.plan
+
+
+    if(Manager.user != null){
+        plan.userId = Manager.user?.id.toString()
+    }
 
     val titleInput = remember {
         InputState()
