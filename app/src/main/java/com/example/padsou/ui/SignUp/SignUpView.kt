@@ -51,7 +51,7 @@ fun SignUpView(onNavigateToSignIn : ()->Unit, onNavigateToPlans : ()->Unit){
         Box() {
             Column(
                 modifier = Modifier
-                    .padding(vertical = 60.dp),
+                    .padding(vertical = 60.dp, horizontal = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(17.dp)
             ) {
 

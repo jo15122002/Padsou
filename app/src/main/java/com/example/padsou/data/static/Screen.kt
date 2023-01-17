@@ -8,6 +8,7 @@ sealed class Screen(val route: String, val icon: Int) {
     object SignUp : Screen("signUp", R.drawable.ic_home)
     object SignIn : Screen("signIn", R.drawable.ic_home)
     object AddPlan : Screen("addPlan", R.drawable.ic_add)
+    object AddPlanPhoto : Screen("addPlanPhoto", R.drawable.ic_add)
     object Profile : Screen("profile", R.drawable.ic_profile)
     object PlansByCategory : Screen("plansByCategory", R.drawable.ic_home)
 }

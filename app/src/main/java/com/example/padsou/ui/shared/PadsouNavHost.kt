@@ -12,8 +12,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.padsou.data.database.Database
 import com.example.padsou.data.static.Screen
+import com.example.padsou.ui.add_plan.AddPlanDescPage
 import com.example.padsou.ui.SignIn.SignInView
 import com.example.padsou.ui.SignUp.SignUpView
+import com.example.padsou.ui.add_plan.AddPlanPhotoPage
 import com.example.padsou.ui.add_plan.AddPlanView
 import com.example.padsou.ui.home.HomeView
 import com.example.padsou.ui.home.HomeViewModel
@@ -47,11 +49,12 @@ fun PadsouNavHost(
             SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
         }
 
+        composable(Screen.AddPlan.route) { AddPlanDescPage(navController, { navController.navigate(Screen.AddPlanPhoto.route) }) }
+        composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
         composable(Screen.Home.route) {
             Log.d("ViewModel", "init composable")
             HomeView(navController)
         }
-        composable(Screen.AddPlan.route) { AddPlanView(navController) }
         composable(Screen.Profile.route) { ProfileView(navController) }
         composable(
             Screen.PlansByCategory.route +"/{categoryId}",

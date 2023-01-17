@@ -42,8 +42,6 @@ import java.time.format.TextStyle
 @Composable
 fun SignInView(onNavigateToHome: () -> Unit, onNavigateToSignUp: () -> Unit){
 
-    val mContext = LocalContext.current
-
     Column(
         Modifier
             .background(BackgroundWhite)
@@ -61,7 +59,6 @@ fun SignInView(onNavigateToHome: () -> Unit, onNavigateToSignUp: () -> Unit){
             fontSize = 18.sp
         )
 
-        val passwordVerif = remember { PasswordState()}
 
         val email = remember { EmailState()}
         val password = remember { PasswordState() }
@@ -70,7 +67,7 @@ fun SignInView(onNavigateToHome: () -> Unit, onNavigateToSignUp: () -> Unit){
         Box() {
             Column(
                 modifier = Modifier
-                    .padding(vertical = 60.dp),
+                    .padding(vertical = 60.dp, horizontal = 30.dp),
                 verticalArrangement = Arrangement.spacedBy(17.dp)
             ) {
 
@@ -113,9 +110,6 @@ fun SignInView(onNavigateToHome: () -> Unit, onNavigateToSignUp: () -> Unit){
         }
     }
 }
-
-
-
 
 @Preview(showBackground = true)
 @Composable
