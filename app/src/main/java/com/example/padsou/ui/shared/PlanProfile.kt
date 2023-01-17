@@ -29,9 +29,13 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.models.Plan
+import com.example.padsou.data.models.User
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.TextBlack
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.getField
+import com.google.firebase.ktx.Firebase
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -41,6 +45,22 @@ fun PlanProfile(
 ){
     var height = 105.dp
     if(isBig) height = 150.dp
+
+    val db = Firebase.firestore
+
+    var logo = ""
+
+    if(!plan.userId.toString().isEmpty()){
+        db.collection("users")
+            .document(plan.userId)
+            .get()
+            .addOnSuccessListener { users->
+            var profilePic = users.getField<String>("profilePic")
+                if(profilePic.toString() != ""){
+                    logo = profilePic.toString()
+                }
+        }
+    }
 
     Card(
         modifier = Modifier
@@ -106,6 +126,48 @@ fun PlanProfile(
                         modifier = Modifier
                             .fillMaxSize()
                     )
+
+                    if(!plan.userId.isEmpty() && !logo.isEmpty()){
+                        Image(
+                            bitmap = ImageManager.decodeBase64ToImageBitmap(logo),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .then(
+                                    if (isBig)
+                                        Modifier
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .height(height * 3 / 5)
+                                    else
+                                        Modifier
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .height(height / 2)
+                                )
+                                .fillMaxSize()
+                        )
+                    }else if(!plan.photoUrl.toString().isEmpty()){
+                        AsyncImage(
+                            model = plan.photoUrl.toString(),
+                            contentDescription = "")
+                    }else{
+                        Image(
+                            bitmap = ImageManager.decodeBase64ToImageBitmap(User.defaultUser().profilePic),
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier
+                                .then(
+                                    if (isBig)
+                                        Modifier
+                                            .clip(RoundedCornerShape(10.dp))
+                                            .height(height * 3 / 5)
+                                    else
+                                        Modifier
+                                            .clip(RoundedCornerShape(6.dp))
+                                            .height(height / 2)
+                                )
+                                .fillMaxSize()
+                        )
+                    }
                 }
             }
             Column(Modifier.padding(horizontal = 10.dp)) {
