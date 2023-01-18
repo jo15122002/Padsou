@@ -1,16 +1,13 @@
 package com.example.padsou.ui.shared
 
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.ui.unit.dp
-import com.example.padsou.data.models.Plan
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.padsou.data.models.Plan
 import kotlin.math.ceil
 
 

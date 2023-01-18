@@ -1,15 +1,11 @@
 package com.example.padsou.ui.home
 
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.padsou.data.database.Database
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -38,7 +34,6 @@ class HomeViewModel: ViewModel() {
 
 
     init {
-        Log.d("ViewModel", "Loading cate")
         loadCategories()
         loadPlans()
     }

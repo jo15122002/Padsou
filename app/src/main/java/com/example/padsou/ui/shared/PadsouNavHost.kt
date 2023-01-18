@@ -6,32 +6,24 @@ import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.padsou.data.database.Database
 import com.example.padsou.data.static.Screen
-import com.example.padsou.ui.add_plan.AddPlanDescPage
 import com.example.padsou.ui.SignIn.SignInView
 import com.example.padsou.ui.SignUp.SignUpView
+import com.example.padsou.ui.add_plan.AddPlanDescPage
 import com.example.padsou.ui.add_plan.AddPlanPhotoPage
 import com.example.padsou.ui.add_plan.AddPlanView
 import com.example.padsou.ui.allplans.AllPlansView
 import com.example.padsou.ui.home.HomeView
-import com.example.padsou.ui.home.HomeViewModel
 import com.example.padsou.ui.onboarding.onBoardingPage
-import com.example.padsou.ui.plandetails.PlanDetailsPage
 import com.example.padsou.ui.plandetails.PlanDetailsView
 import com.example.padsou.ui.plansbycategories.PlansByCategoriesView
 import com.example.padsou.ui.profile.ProfileView
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlin.math.log
 
 
 @RequiresApi(Build.VERSION_CODES.P)
@@ -40,7 +32,6 @@ fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
     startDestination: String = Screen.OnBoarding.route
 ){
-    Log.d("ViewModel", "init nav host")
 
     NavHost(
         navController = navController,

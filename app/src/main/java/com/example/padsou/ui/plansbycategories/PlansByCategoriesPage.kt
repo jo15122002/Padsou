@@ -4,7 +4,6 @@ import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -23,16 +22,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
-import com.example.padsou.ui.shared.Layout
 import com.example.padsou.ui.shared.ListPlanProfile
-import com.example.padsou.ui.shared.PlanProfile
 import com.example.padsou.ui.theme.BackgroundWhite
-import com.example.padsou.ui.theme.MainPurple
-import kotlin.math.ceil
 
 
 @RequiresApi(Build.VERSION_CODES.O)

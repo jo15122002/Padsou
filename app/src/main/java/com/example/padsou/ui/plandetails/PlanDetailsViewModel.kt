@@ -4,7 +4,6 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import com.example.padsou.data.managers.Manager
-import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import com.example.padsou.data.models.User
 import com.google.firebase.firestore.ktx.firestore

@@ -22,9 +22,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
-import com.google.accompanist.pager.HorizontalPager
-import com.google.accompanist.pager.rememberPagerState
+import com.example.padsou.ui.onboarding.slider.onBoardingSliderContent
+import com.example.padsou.ui.shared.SliderCheckmark
 
 
 @OptIn(ExperimentalPagerApi::class)

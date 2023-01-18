@@ -1,6 +1,5 @@
 package com.example.padsou.ui.shared
 
-import java.util.regex.Pattern
 
 class InputState : TextFieldState(
     validator = {input, s1 -> isInputValid(input, s1) },

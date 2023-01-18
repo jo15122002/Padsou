@@ -22,11 +22,10 @@ class MainActivity : ComponentActivity() {
                 typography = IntergralCFTypography
             ){
                 PadsouNavHost()
+                //askNotificationPermission()
             }
         }
     }
-
-
 }
 
 

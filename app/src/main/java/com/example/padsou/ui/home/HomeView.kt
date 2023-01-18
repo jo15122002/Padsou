@@ -1,27 +1,31 @@
 package com.example.padsou.ui.home
 
+import android.Manifest
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.padsou.data.static.Screen
+import com.example.padsou.ui.Permissions.PermissionsChecker
 import com.example.padsou.ui.shared.Layout
+import com.google.accompanist.permissions.*
 
 
 @RequiresApi(Build.VERSION_CODES.O)
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomeView(navController: NavHostController){
 
-    Log.d("ViewModel", "init home view")
+    val permissionState = rememberMultiplePermissionsState(permissions = listOf(Manifest.permission.POST_NOTIFICATIONS))
+
+    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && !permissionState.allPermissionsGranted){
+        PermissionsChecker(permissionsState = permissionState, description = "Test")
+    }
 
     Layout(
         navController = navController,
