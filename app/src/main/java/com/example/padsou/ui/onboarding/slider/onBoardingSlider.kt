@@ -1,11 +1,8 @@
 package com.example.padsou.ui.onboarding
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,8 +13,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.padsou.ui.onboarding.slider.onBoardingSliderContent
 import com.example.padsou.ui.shared.SliderCheckmark
-import com.example.padsou.ui.theme.MainCorail
-import com.example.padsou.ui.theme.MainPurple
 
 
 @Composable

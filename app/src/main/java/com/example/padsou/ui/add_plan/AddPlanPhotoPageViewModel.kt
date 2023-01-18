@@ -1,8 +1,6 @@
 package com.example.padsou.ui.add_plan
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.io.ByteArrayOutputStream
 import java.util.*
 
 object AddPlanPhotoPageViewModel : ViewModel(){

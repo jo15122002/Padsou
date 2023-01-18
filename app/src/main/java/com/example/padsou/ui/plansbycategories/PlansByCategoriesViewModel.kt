@@ -1,6 +1,5 @@
 package com.example.padsou.ui.plansbycategories
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Category

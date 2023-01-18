@@ -1,15 +1,9 @@
 package com.example.padsou.data.models
 
-import android.content.Context
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.text.substring
-import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.managers.Manager
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase

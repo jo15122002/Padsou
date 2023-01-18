@@ -1,8 +1,5 @@
 package com.example.padsou.data.models
 
-import android.util.Log
-import com.example.padsou.data.managers.Manager
-import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -32,7 +29,7 @@ class Plan(
                 "https://www.maspatule.com/blog/2021/07/26/recette-tacos-mexicain/",
                 "0",
                 "0",
-                listOf(image, "test"),
+                listOf("test", "test"),
             )
         }
     }

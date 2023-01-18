@@ -1,10 +1,7 @@
 package com.example.padsou.data.models;
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.graphics.toColorInt
-import com.example.padsou.R
-import com.example.padsou.ui.theme.CourseColor
 
 class Category (var id:String, var name: String, var color: String, var iconUrl: String){
 

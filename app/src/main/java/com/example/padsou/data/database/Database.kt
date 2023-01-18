@@ -27,7 +27,6 @@ object Database{
                     val localCategory = document.toObject<Category>()
                     localCategory.id = document.id
                     items.add(localCategory)
-                    Log.d("ViewModel", "DocumentSnapshot localCategory: $localCategory")
                 }
                 onSuccess(items)
             }
@@ -43,7 +42,6 @@ object Database{
                     val localPlan = document.toObject<Plan>()
                     localPlan.id = document.id
                     items.add(localPlan)
-                    Log.d("ViewModel", "DocumentSnapshot localPlan: $localPlan")
                 }
                 onSuccess(items)
             }

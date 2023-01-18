@@ -1,6 +1,5 @@
 package com.example.padsou.ui.shared
 
-import android.graphics.drawable.shapes.Shape
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.background
 import androidx.compose.runtime.getValue

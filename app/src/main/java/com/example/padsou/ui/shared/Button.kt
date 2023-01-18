@@ -1,9 +1,6 @@
 package com.example.padsou.ui.shared
 
-import android.content.ContentValues.TAG
 import android.os.Build
-import android.util.Log
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,11 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.theme.MainPurple
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.delay
 import java.util.*
-import java.util.logging.Handler
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
