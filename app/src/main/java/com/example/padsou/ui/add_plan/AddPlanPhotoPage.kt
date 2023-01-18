@@ -16,8 +16,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -115,7 +115,7 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
                 ){
                     Text("+", fontSize = 65.sp, color = Color.White)
                 }
-                LazyVerticalGrid(cells = GridCells.Fixed(3)) {
+                LazyVerticalGrid(columns = GridCells.Fixed(3)) {
                     items(selectedImages.value.size){index ->
                         if(selectedImages.value.isNotEmpty()){
                             Image(

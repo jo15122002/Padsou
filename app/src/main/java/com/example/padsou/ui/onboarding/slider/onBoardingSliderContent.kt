@@ -14,14 +14,12 @@ import androidx.compose.ui.unit.dp
 import com.example.padsou.data.models.Plan
 import com.example.padsou.ui.shared.PlanProfile
 import com.example.padsou.ui.shared.SliderCheckmark
-
-
+import com.google.accompanist.pager.HorizontalPager
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun onBoardingSliderContent(){
-
+fun onBoardingSliderContent(planList : List<Plan>){
 
     Column(
         verticalArrangement = Arrangement.spacedBy(11.dp),
@@ -30,14 +28,14 @@ fun onBoardingSliderContent(){
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile(onPlanClick = {})
-            PlanProfile(onPlanClick = {})
+            PlanProfile(plan = planList[0], onPlanClick = {})
+            PlanProfile(plan = planList[1], onPlanClick = {})
         }
         Row(
             horizontalArrangement = Arrangement.spacedBy(11.dp)
         ) {
-            PlanProfile(onPlanClick = {})
-            PlanProfile(onPlanClick = {})
+            PlanProfile(plan = planList[2], onPlanClick = {})
+            PlanProfile(plan = planList[3], onPlanClick = {})
         }
     }
 
@@ -49,5 +47,5 @@ fun onBoardingSliderContent(){
 @Preview(showBackground = true)
 @Composable
 fun DefaultOnBoardingSliderPreview() {
-    onBoardingSliderContent()
+    onBoardingSliderContent(listOf())
 }

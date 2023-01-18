@@ -17,11 +17,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.viewpager.widget.ViewPager
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -63,6 +67,7 @@ fun onBoardingPage(onNavigate : ()->Unit){
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultOnBoardingPreview() {
