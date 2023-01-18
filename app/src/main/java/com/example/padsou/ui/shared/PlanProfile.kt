@@ -12,7 +12,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -48,18 +48,18 @@ fun PlanProfile(
 
     val db = Firebase.firestore
 
-    var logo = ""
+    var logo by remember { mutableStateOf("") }
 
     if(!plan.userId.toString().isEmpty()){
         db.collection("users")
             .document(plan.userId)
             .get()
             .addOnSuccessListener { users->
-            var profilePic = users.getField<String>("profilePic")
+                var profilePic = users.getField<String>("profilePic")
                 if(profilePic.toString() != ""){
                     logo = profilePic.toString()
                 }
-        }
+            }
     }
 
     Card(
@@ -127,7 +127,8 @@ fun PlanProfile(
                             .fillMaxSize()
                     )
 
-                    if(!plan.userId.isEmpty() && !logo.isEmpty()){
+                    if(plan.userId.isNotEmpty() && logo.isNotEmpty() && logo != null && logo != "null"){
+                        println("***" + logo)
                         Image(
                             bitmap = ImageManager.decodeBase64ToImageBitmap(logo),
                             contentDescription = "",
@@ -145,9 +146,9 @@ fun PlanProfile(
                                 )
                                 .fillMaxSize()
                         )
-                    }else if(!plan.photoUrl.toString().isEmpty()){
+                    }else if(!plan.logoUrl.isEmpty()){
                         AsyncImage(
-                            model = plan.photoUrl.toString(),
+                            model = plan.logoUrl.toString(),
                             contentDescription = "")
                     }else{
                         Image(
