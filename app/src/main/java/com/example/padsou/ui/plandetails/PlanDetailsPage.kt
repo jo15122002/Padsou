@@ -49,6 +49,21 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
     val plan: State<Plan> = viewModel.plan.collectAsState()
     var count by remember { mutableStateOf(plan.value.utilisationCount) }
 
+    val imageModifier = Modifier
+        .drawWithCache {
+            val gradient = Brush.horizontalGradient(
+                colors = listOf(Color.Transparent, Color.Black),
+                startX = size.width,
+                endX = size.width / 100
+            )
+            onDrawWithContent {
+                drawContent()
+                drawRect(gradient, blendMode = BlendMode.Multiply)
+            }
+        }
+        .fillMaxWidth()
+        .height(275.dp)
+
     LazyColumn(
         Modifier
             .background(BackgroundWhite)
@@ -58,23 +73,18 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
             Box(
                 Modifier.clip(RoundedCornerShape(bottomStart = 35.dp, bottomEnd = 35.dp))
             ) {
-                Image(bitmap = ImageManager.decodeBase64ToImageBitmap(plan.value.base64Images[0]),
-                    contentDescription = "",
-                    modifier = Modifier
-                        .drawWithCache {
-                            val gradient = Brush.horizontalGradient(
-                                colors = listOf(Color.Transparent, Color.Black),
-                                startX = size.width,
-                                endX = size.width / 100
-                            )
-                            onDrawWithContent {
-                                drawContent()
-                                drawRect(gradient, blendMode = BlendMode.Multiply)
-                            }
-                        }
-                        .fillMaxWidth()
-                        .height(275.dp)
-                )
+                if(!plan.value.base64Images.isEmpty() && plan.value.base64Images[0].startsWith("/9j/")){
+                    Image(bitmap = ImageManager.decodeBase64ToImageBitmap(plan.value.base64Images[0]),
+                        contentDescription = "",
+                        modifier = imageModifier
+                    )
+                }else{
+                    AsyncImage(
+                        model = plan.value.photoUrl,
+                        contentDescription = "",
+                        contentScale = ContentScale.Crop,
+                        modifier = imageModifier)
+                }
 
                 Column(
                     Modifier
@@ -131,12 +141,12 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
                 val uriHandler = LocalUriHandler.current
                 Button(
                     onClick = {
-                        //uriHandler.openUri(plan.link)
+                        uriHandler.openUri(plan.value.link)
                         count ++
                         plan.value.updateUtilisationCount(count)
                     },
                     shape = RoundedCornerShape(15.dp),
-                    contentPadding = PaddingValues(horizontal = 70.dp, vertical = 18.dp),
+                    contentPadding = PaddingValues(horizontal = 30.dp, vertical = 18.dp),
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MainPurple,
                         contentColor = Color.White

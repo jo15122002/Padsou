@@ -32,7 +32,7 @@ class Plan(
                 "https://www.maspatule.com/blog/2021/07/26/recette-tacos-mexicain/",
                 "0",
                 "0",
-                listOf(image, "test"),
+                listOf("test", "test"),
             )
         }
     }

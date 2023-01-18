@@ -55,7 +55,13 @@ fun PadsouNavHost(
             SignInView(onNavigateToHome = {navController.navigate(Screen.Home.route)}, onNavigateToSignUp = {navController.navigate(Screen.SignUp.route)})
         }
 
-        composable(Screen.AddPlan.route) { AddPlanDescPage(navController, { navController.navigate(Screen.AddPlanPhoto.route) }) }
+        composable(Screen.AddPlan.route) {
+            AddPlanDescPage(navController) {
+                navController.navigate(
+                    Screen.AddPlanPhoto.route
+                )
+            }
+        }
 
         composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
 

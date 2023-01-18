@@ -1,5 +1,6 @@
 package com.example.padsou.ui.shared
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -41,6 +42,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.getField
 import com.google.firebase.ktx.Firebase
 
+@SuppressLint("SuspiciousIndentation")
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlanProfile(
@@ -66,6 +68,19 @@ fun PlanProfile(
                 }
         }
     }
+
+    val imageModifier = Modifier
+        .then(
+            if (isBig)
+                Modifier
+                    .clip(RoundedCornerShape(10.dp))
+                    .height(height * 3 / 5)
+            else
+                Modifier
+                    .clip(RoundedCornerShape(6.dp))
+                    .height(height / 2)
+        )
+        .fillMaxSize()
 
     Card(
         modifier = Modifier
@@ -100,23 +115,14 @@ fun PlanProfile(
                             bitmap = ImageManager.decodeBase64ToImageBitmap(plan.base64Images[0]),
                             contentDescription = "",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .then(
-                                    if (isBig)
-                                        Modifier
-                                            .clip(RoundedCornerShape(10.dp))
-                                            .height(height * 3 / 5)
-                                    else
-                                        Modifier
-                                            .clip(RoundedCornerShape(6.dp))
-                                            .height(height / 2)
-                                )
-                                .fillMaxSize()
+                            modifier = imageModifier
                         )
                     }else{
                         AsyncImage(
                             model = plan.photoUrl,
-                            contentDescription = "")
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop,
+                            modifier = imageModifier)
                     }
                 }
                 Card(
