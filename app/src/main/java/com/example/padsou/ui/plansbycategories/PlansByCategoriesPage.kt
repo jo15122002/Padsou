@@ -37,7 +37,7 @@ import kotlin.math.ceil
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategoriesViewModel){
+fun PlansByCategoriesPage(navigateBack: () -> Unit, onPlanClick: (id: String)->Unit, viewModel: PlansByCategoriesViewModel){
 
     val category: State<Category> = viewModel.category.collectAsState()
     val plans: State<List<Plan>> = viewModel.plans.collectAsState()
@@ -84,7 +84,7 @@ fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategories
                     .padding(28.dp, 30.dp)
             ) {
                 Log.d("viewModel", "plans.value.size ${plans.value.size}")
-                ListPlanProfile(plans.value, onPlanClick = {})
+                ListPlanProfile(plans.value, onPlanClick = onPlanClick)
             }
         }
 
@@ -97,5 +97,5 @@ fun PlansByCategoriesPage(navigateBack: () -> Unit, viewModel: PlansByCategories
 @Preview(showBackground = true)
 @Composable
 fun DefaultPlansByCategoriesPagePreview() {
-    PlansByCategoriesPage(navigateBack = { }, PlansByCategoriesViewModel())
+    PlansByCategoriesPage(navigateBack = { }, onPlanClick={}, PlansByCategoriesViewModel() )
 }

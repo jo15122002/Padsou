@@ -1,5 +1,7 @@
 package com.example.padsou.ui.plansbycategories
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +15,7 @@ import com.example.padsou.data.static.Screen
 import com.example.padsou.ui.shared.Layout
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun PlansByCategoriesView(navController: NavHostController, categoryId: String?, viewModel: PlansByCategoriesViewModel = PlansByCategoriesViewModel()){
 
@@ -30,9 +33,15 @@ fun PlansByCategoriesView(navController: NavHostController, categoryId: String?,
                 .fillMaxWidth()
                 .fillMaxHeight()
             ){
-                PlansByCategoriesPage(navigateBack = {
-                    navController.navigate(Screen.Home.route)
-                }, viewModel)
+                PlansByCategoriesPage(
+                    navigateBack = {
+                        navController.navigate(Screen.Home.route)
+                    },
+                    onPlanClick = { id ->
+                        navController.navigate(Screen.PlanDetails.route+"/"+id)
+                    },
+                    viewModel
+                )
             }
         }
     )

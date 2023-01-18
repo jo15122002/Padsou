@@ -24,10 +24,10 @@ import com.example.padsou.ui.theme.MainPurple
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomeSearchView(viewModel: HomeViewModel){
+fun HomeSearchView(viewModel: HomeViewModel, onPlanClick: (id: String)->Unit){
 
     val searchPlans: State<List<Plan>> = viewModel.searchPlans.collectAsState()
 
-    ListPlanProfile(searchPlans.value, onPlanClick = {})
+    ListPlanProfile(searchPlans.value, onPlanClick)
 
 }

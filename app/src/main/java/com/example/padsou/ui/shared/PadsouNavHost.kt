@@ -2,6 +2,7 @@ package com.example.padsou.ui.shared
 
 import android.os.Build
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +37,7 @@ import kotlin.math.log
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.OnBoarding.route
+    startDestination: String = Screen.Home.route
 ){
     Log.d("ViewModel", "init nav host")
 
@@ -66,6 +67,8 @@ fun PadsouNavHost(
         composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
 
         composable(Screen.Home.route) {
+            BackHandler(true) { }
+
             Log.d("ViewModel", "init composable")
             HomeView(navController)
         }
