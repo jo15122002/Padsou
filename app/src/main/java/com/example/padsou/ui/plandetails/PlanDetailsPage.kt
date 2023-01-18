@@ -4,6 +4,7 @@ import android.content.ClipData.Item
 import android.graphics.Paint.Align
 import android.os.Build
 import android.telecom.Call.Details
+import android.webkit.URLUtil
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -40,6 +41,7 @@ import com.example.padsou.data.models.User
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
+import com.example.padsou.ui.theme.TextGray
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -49,6 +51,8 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
     val plan: State<Plan> = viewModel.plan.collectAsState()
     var count by remember { mutableStateOf(plan.value.utilisationCount) }
     val author = viewModel.user.collectAsState()
+
+    val buttonEnabled =  !URLUtil.isValidUrl(plan.value.link)
 
     val imageModifier = Modifier
         .drawWithCache {
@@ -158,7 +162,7 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
                 val uriHandler = LocalUriHandler.current
                 Button(
                     onClick = {
-                        uriHandler.openUri(plan.value.link)
+                        uriHandler.openUri("http://${plan.value.link}")
                         count ++
                         plan.value.updateUtilisationCount(count)
                     },
@@ -168,6 +172,7 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
                         backgroundColor = MainPurple,
                         contentColor = Color.White
                     ),
+                    enabled = buttonEnabled
                 ) {
                     Text(text = "PROFITER DE L'OFFRE",
                         color = Color.White,

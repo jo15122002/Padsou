@@ -1,6 +1,8 @@
 package com.example.padsou.ui.home
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,6 +17,7 @@ import com.example.padsou.data.static.Screen
 import com.example.padsou.ui.shared.Layout
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HomeView(navController: NavHostController){
 
@@ -30,6 +33,10 @@ fun HomeView(navController: NavHostController){
                     },
                     onPlanClick = { id ->
                         navController.navigate(Screen.PlanDetails.route+"/"+id)
+                    },
+                    onVoirTout = {
+                        Log.d("allPlans", "navigate")
+                        navController.navigate(Screen.AllPlans.route)
                     }
                 )
             }
@@ -37,6 +44,7 @@ fun HomeView(navController: NavHostController){
     )
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultHomeViewPreview() {

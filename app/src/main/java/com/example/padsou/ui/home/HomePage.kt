@@ -1,6 +1,8 @@
 package com.example.padsou.ui.home
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
@@ -28,8 +30,9 @@ import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.*
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (String)->Unit, onPlanClick: (String)->Unit){
+fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (String)->Unit, onPlanClick: (String)->Unit, onVoirTout:()->Unit){
 
     val showSearchView:State<Boolean> = viewModel.showSearchView.collectAsState()
     val isLoadedCategory: State<Boolean> = viewModel.isLoadedCategory.collectAsState()
@@ -85,9 +88,9 @@ fun HomePage(viewModel: HomeViewModel = HomeViewModel(), onCategoryClick: (Strin
                         .padding(28.dp, 30.dp),
                 ) {
                     if(showSearchView.value){
-                        HomeSearchView(viewModel)
+                        HomeSearchView(viewModel, onPlanClick)
                     }else {
-                        DefaultHomeView(viewModel, onCategoryClick, onPlanClick)
+                        DefaultHomeView(viewModel, onCategoryClick, onPlanClick, onVoirTout)
                     }
                 }
             }

@@ -2,6 +2,7 @@ package com.example.padsou.ui.shared
 
 import android.os.Build
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +20,7 @@ import com.example.padsou.ui.SignIn.SignInView
 import com.example.padsou.ui.SignUp.SignUpView
 import com.example.padsou.ui.add_plan.AddPlanPhotoPage
 import com.example.padsou.ui.add_plan.AddPlanView
+import com.example.padsou.ui.allplans.AllPlansView
 import com.example.padsou.ui.home.HomeView
 import com.example.padsou.ui.home.HomeViewModel
 import com.example.padsou.ui.onboarding.onBoardingPage
@@ -66,6 +68,8 @@ fun PadsouNavHost(
         composable(Screen.AddPlanPhoto.route) { AddPlanPhotoPage(navController) }
 
         composable(Screen.Home.route) {
+            BackHandler(true) { }
+
             Log.d("ViewModel", "init composable")
             HomeView(navController)
         }
@@ -86,6 +90,12 @@ fun PadsouNavHost(
         ){ backStackEntry ->
             val planId = backStackEntry.arguments?.getString("planId")
             PlanDetailsView(navController, planId)
+        }
+        composable(
+            Screen.AllPlans.route,
+        ){
+
+            AllPlansView(navController)
         }
     }
 }
