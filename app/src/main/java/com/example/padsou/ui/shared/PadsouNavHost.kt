@@ -94,6 +94,7 @@ fun PadsouNavHost(
         composable(
             Screen.AllPlans.route,
         ){
+
             AllPlansView(navController)
         }
     }

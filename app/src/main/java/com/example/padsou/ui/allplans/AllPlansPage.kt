@@ -54,7 +54,6 @@ fun AllPlansPage(navigateBack : ()->Unit, onPlanClick: (id:String)->Unit, viewMo
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
             .background(MainCorail)
     ) {
         item{
@@ -81,7 +80,6 @@ fun AllPlansPage(navigateBack : ()->Unit, onPlanClick: (id:String)->Unit, viewMo
                 Column(
                     Modifier
                         .fillMaxWidth()
-                        .fillParentMaxHeight()
                         .clip(RoundedCornerShape(topStart = 35.dp, topEnd = 35.dp))
                         .background(BackgroundWhite)
                         .padding(28.dp, 30.dp)

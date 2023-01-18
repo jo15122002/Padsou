@@ -35,6 +35,7 @@ fun HomeView(navController: NavHostController){
                         navController.navigate(Screen.PlanDetails.route+"/"+id)
                     },
                     onVoirTout = {
+                        Log.d("allPlans", "navigate")
                         navController.navigate(Screen.AllPlans.route)
                     }
                 )

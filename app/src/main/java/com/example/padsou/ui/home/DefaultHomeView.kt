@@ -1,6 +1,7 @@
 package com.example.padsou.ui.home
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -33,7 +34,6 @@ fun DefaultHomeView(viewModel: HomeViewModel, onCategoryClick: (id: String)->Uni
 
     val categories: State<List<com.example.padsou.data.models.Category>> = viewModel.categories.collectAsState()
     val plans: State<List<Plan>> = viewModel.plans.collectAsState()
-
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
@@ -58,5 +58,5 @@ fun DefaultHomeView(viewModel: HomeViewModel, onCategoryClick: (id: String)->Uni
                 onVoirTout()
             })
     }
-    ListPlanProfile(plans.value, onPlanClick)
+    ListPlanProfile(plans.value.take(6), onPlanClick)
 }

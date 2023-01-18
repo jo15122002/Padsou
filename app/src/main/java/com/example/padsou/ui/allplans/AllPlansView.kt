@@ -25,11 +25,12 @@ import com.example.padsou.ui.shared.Layout
 @Composable
 fun AllPlansView(navController: NavHostController, viewModel: AllPlansViewModel = AllPlansViewModel()){
 
+
     Layout(
         navController = navController,
         content = {
             Box(Modifier.fillMaxHeight()){
-                AllPlansPage(
+                    AllPlansPage(
                     navigateBack = {
                         navController.navigate(Screen.Home.route)
                     },
