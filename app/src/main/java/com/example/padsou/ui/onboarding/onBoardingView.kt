@@ -1,5 +1,7 @@
 package com.example.padsou.ui.onboarding
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun onBoardingPage(onNavigate : ()->Unit){
 
