@@ -2,7 +2,8 @@ package com.example.padsou.ui.shared
 
 import java.util.regex.Pattern
 
-class EmailState : TextFieldState(
+class EmailState(defaultText: String = "") : TextFieldState(
+    defaultText,
     validator = {email, s1 -> isEmailValid(email, s1) },
     errorMessage = {email -> emailErrorMessage(email)}
 ){

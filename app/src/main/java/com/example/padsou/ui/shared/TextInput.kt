@@ -27,12 +27,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.padsou.R
 import com.example.padsou.data.models.User
+import com.example.padsou.data.store.UserStore
 import com.example.padsou.ui.theme.BackgroundWhite
+import com.example.padsou.ui.theme.LightYellow
 import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.Placeholder
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.flow.firstOrNull
 import java.util.Objects.toString
 
 
@@ -50,7 +53,8 @@ fun TextInput(placeholder:@Composable ()->Unit, height: Dp = 56.dp){
     )
 }
 
-@Composable fun Email(email: String, error: String?, placeholder: String = "Ton adresse e-mail" , title: String = "", onEmailChanged : (String) -> Unit){
+@Composable fun Email(email: String, error: String?, haveInfo: Boolean = false, placeholder: String = "Ton adresse e-mail" , title: String = "", onEmailChanged : (String) -> Unit){
+
     Column{
         Text(title, modifier = Modifier.padding(bottom = 7.dp), style = MaterialTheme.typography.h4)
         OutlinedTextField(

@@ -31,7 +31,7 @@ data class User(var id : String, var email: String, var password: String, var us
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun addNewUser(navigator: ()->Unit, context: android.content.Context){
+    fun addNewUser(navigator: ()->Unit, context: android.content.Context, onSuccess: () -> Unit){
         val db = Firebase.firestore
         val userRef = db.collection("users")
 
@@ -46,6 +46,7 @@ data class User(var id : String, var email: String, var password: String, var us
                             Manager.user = userToAdd;
                             navigator()
                             Toast.makeText(context, "Bienvenue mon pote 😁", Toast.LENGTH_LONG).show()
+                            onSuccess()
                         }
                 }
                 else{
@@ -54,7 +55,7 @@ data class User(var id : String, var email: String, var password: String, var us
             }
     }
 
-    fun verifyLogin(navigator: ()->Unit, context: android.content.Context){
+    fun verifyLogin(navigator: ()->Unit, context: android.content.Context, onSuccess: ()->Unit){
         val db = Firebase.firestore
         val allUsers = db.collection("users")
 
@@ -68,6 +69,7 @@ data class User(var id : String, var email: String, var password: String, var us
                     Manager.user?.id = users.first().id
                     navigator()
                     Toast.makeText(context, "Connexion réussi 🔥", Toast.LENGTH_LONG).show()
+                    onSuccess()
                 }
                 else{
                     Toast.makeText(context, "Aucun compte avec ces identifiants n'a été trouvé", Toast.LENGTH_LONG).show()

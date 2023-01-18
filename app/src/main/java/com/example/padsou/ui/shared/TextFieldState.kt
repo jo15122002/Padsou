@@ -1,15 +1,18 @@
 package com.example.padsou.ui.shared
 
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
 open class TextFieldState(
+    defaultText: String = "",
     private val validator : (String, String?) -> Boolean,
     private val errorMessage : (String) -> String
 ){
 
-    var text by mutableStateOf("")
+
+    var text by mutableStateOf(defaultText)
     var error by mutableStateOf<String?>(null)
 
     fun validate(passwordToVerifie : String?){

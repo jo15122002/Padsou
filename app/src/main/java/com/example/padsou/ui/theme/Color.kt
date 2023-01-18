@@ -30,3 +30,6 @@ val YellowStar = Color(0xFFFFC107)
 val IconColor = Color(0xFFBABFCD)
 val IconBackground = Color(0xFFF2F2F2)
 
+// Already have credentials on sign up
+val LightYellow = Color(0xFFFFFFE0)
+

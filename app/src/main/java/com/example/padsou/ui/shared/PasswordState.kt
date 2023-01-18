@@ -1,6 +1,7 @@
 package com.example.padsou.ui.shared
 
-class PasswordState: TextFieldState(
+class PasswordState(defaultText:String = ""): TextFieldState(
+    defaultText,
     validator = {password, s1 -> isPasswordValid(password, s1)},
     errorMessage = { passwordErrorMessage()},
 )

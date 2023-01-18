@@ -14,25 +14,33 @@ import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
+import com.example.padsou.data.store.UserStore
 import com.example.padsou.ui.theme.MainPurple
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 import java.util.logging.Handler
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SignInButton(enabled: Boolean, email: String, password:String, navigator: ()->Unit, context: android.content.Context ){
+fun SignInButton(enabled: Boolean, email: String, password:String, navigator: ()->Unit, context: android.content.Context, dataStore: UserStore ){
+    val scope = rememberCoroutineScope()
     Button(
         onClick = {
             val userToAdd = User(email, password)
-            userToAdd.addNewUser(navigator, context)
+            userToAdd.addNewUser(navigator, context){
+                scope.launch {
+                    dataStore.saveCredentials(email, password, true)
+                }
+            }
         },
         shape = RoundedCornerShape(15.dp),
         contentPadding = PaddingValues(horizontal = 90.dp, vertical = 18.dp),
@@ -50,11 +58,16 @@ fun SignInButton(enabled: Boolean, email: String, password:String, navigator: ()
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun SignUpButton(enabled: Boolean, email: String, password: String, navigator: ()->Unit, context: android.content.Context){
+fun SignUpButton(enabled: Boolean, email: String, password: String, rememberMe:Boolean, navigator: ()->Unit, context: android.content.Context, dataStore: UserStore){
+    val scope = rememberCoroutineScope()
     Button(
         onClick = {
             val user = User(email, password);
-            user.verifyLogin(navigator, context);
+            user.verifyLogin(navigator, context, onSuccess = {
+                scope.launch {
+                    dataStore.saveCredentials(email, password, rememberMe)
+                }
+            });
         },
 
         shape = RoundedCornerShape(15.dp),
