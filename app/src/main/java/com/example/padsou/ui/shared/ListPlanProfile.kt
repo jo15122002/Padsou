@@ -19,6 +19,20 @@ import kotlin.math.ceil
 fun ListPlanProfile(plans: List<Plan>, onPlanClick: (id: String)->Unit){
 
 
+    var isFirstColum:Boolean = true
+
+    var column1 : MutableList<Plan> = mutableListOf<Plan>()
+    var column2 : MutableList<Plan> = mutableListOf<Plan>()
+
+    for (plan in plans){
+        if(isFirstColum){
+            column1.add(plan)
+        }else{
+            column2.add(plan)
+        }
+        isFirstColum = !isFirstColum
+    }
+
     var size = ceil((plans.size / 2).toDouble())
     if(plans.size >= 3) size += 1
     if(plans.size <= 1) size += 1
@@ -30,22 +44,23 @@ fun ListPlanProfile(plans: List<Plan>, onPlanClick: (id: String)->Unit){
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(5.dp)
     ) {
-        temp.forEach { list ->
-            Column(
-                Modifier
-                    .weight(1f)
-            ) {
-                list.forEach { plan ->
-                    PlanProfile(plan, true, onPlanClick)
-                }
+        Column(
+            Modifier
+                .weight(1f)
+        ) {
+            column1.forEach { plan ->
+                PlanProfile(plan, true, onPlanClick)
             }
         }
-        if(plans.size == 1){
-            Column(
-                Modifier
-                    .weight(1f)
-            ){ }
+        Column(
+            Modifier
+                .weight(1f)
+        ) {
+            column2.forEach { plan ->
+                PlanProfile(plan, true, onPlanClick)
+            }
         }
+
     }
 
 }
