@@ -48,6 +48,7 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
 
     val plan: State<Plan> = viewModel.plan.collectAsState()
     var count by remember { mutableStateOf(plan.value.utilisationCount) }
+    val author = viewModel.user.collectAsState()
 
     val imageModifier = Modifier
         .drawWithCache {
@@ -113,10 +114,26 @@ fun PlanDetailsPage(viewModel: PlanDetailsViewModel){
                     Column(
                         Modifier.padding(20.dp)
                     ) {
-                        Row() {
+                        Row(
+                            Modifier.padding(bottom = 24.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            if(author.value.profilePic.isNotEmpty()){
+                                Image(
+                                    bitmap = ImageManager.decodeBase64ToImageBitmap(author.value.profilePic),
+                                    contentDescription = "",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .height(30.dp)
+                                        .padding(end = 11.dp)
+                                        .clip(RoundedCornerShape(15.dp))
+                                        .aspectRatio(1f)
+                                        .fillMaxSize()
+                                )
+                            }
                             Column() {
                                 Text("Proposé par", fontSize = 10.sp, color = Color(0xFFA6A6A6))
-                                Text("Killian74", fontSize = 10.sp)
+                                Text(author.value.username, fontSize = 10.sp, fontWeight = FontWeight.Bold)
                             }
                         }
                         Text(plan.value.description)
