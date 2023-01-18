@@ -6,6 +6,7 @@ import com.example.padsou.data.database.Database
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import com.example.padsou.data.models.User
+import com.google.firebase.firestore.ktx.getField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -18,6 +19,9 @@ object Manager {
     private val _plans = MutableStateFlow<MutableList<Plan>>(mutableListOf())
     val plans = _plans.asStateFlow()
 
+    private val _users = MutableStateFlow<MutableList<User>>(mutableListOf())
+    val users = _users.asStateFlow()
+
     private fun loadCategories(onGet: (MutableList<Category>)->Unit){
         Database.getAllCategory(onSuccess = { items ->
             _categories.value = items
@@ -28,6 +32,13 @@ object Manager {
     private fun loadPlans(onGet: (MutableList<Plan>)->Unit){
         Database.getAllPlan(onSuccess = { items ->
             _plans.value = items
+            onGet(items)
+        })
+    }
+
+    private fun loadUsers(onGet: (MutableList<User>) -> Unit){
+        Database.getAllUser(onSuccess = { items ->
+            _users.value = items
             onGet(items)
         })
     }
@@ -86,6 +97,18 @@ object Manager {
             }
         }else{
             val temp = _plans.value.first{it.id == id}
+            onGet(temp)
+        }
+    }
+
+    fun getUser(id: String, onGet: (User) -> Unit){
+        if(users.value.size == 0){
+            loadUsers { items ->
+                val temp = items.first { it.id == id }
+                onGet(temp)
+            }
+        }else{
+            val temp = _users.value.first{ it.id == id }
             onGet(temp)
         }
     }
