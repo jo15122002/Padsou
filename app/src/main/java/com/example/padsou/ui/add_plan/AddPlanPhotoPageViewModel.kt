@@ -39,7 +39,9 @@ object AddPlanPhotoPageViewModel : ViewModel(){
         this.plan.base64Images = ImageManager.encodeImageUriListToBase64(list, context)
     }
 
-    fun uploadPlan(){
-        db.collection("plans").add(this.plan)
+    fun uploadPlan(onSuccess : () -> Unit){
+        db.collection("plans").add(this.plan).addOnSuccessListener {
+            onSuccess()
+        }
     }
 }

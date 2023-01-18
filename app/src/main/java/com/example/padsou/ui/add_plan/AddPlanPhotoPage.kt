@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import android.widget.Space
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -45,6 +46,7 @@ import coil.compose.rememberImagePainter
 import com.example.padsou.ui.shared.Layout
 import com.google.common.cache.Weigher
 import kotlinx.coroutines.flow.MutableStateFlow
+import okhttp3.internal.wait
 import java.io.ByteArrayOutputStream
 import java.util.*
 
@@ -140,7 +142,10 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
                             context,
                             selectedImages.value
                         )
-                        viewModel.uploadPlan()
+                        viewModel.uploadPlan{
+                            Toast.makeText(context, "Ton plan à bien été enregistré 👌", Toast.LENGTH_LONG).show()
+                            navController.navigate("home")
+                        }
                     }
                     ,
                     contentAlignment = Alignment.Center
