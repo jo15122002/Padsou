@@ -30,7 +30,7 @@ class Plan(
                 "https://www.maspatule.com/blog/wp-content/uploads/2021/07/IMG_4190-2-800x1067.jpg",
                 "https://upload.wikimedia.org/wikipedia/commons/a/a3/Basic-Fit_logo.png",
                 "https://www.maspatule.com/blog/2021/07/26/recette-tacos-mexicain/",
-                "0",
+                "479iX3fq0PkPTgPbCkZU",
                 "0",
                 listOf("test", "test"),
             )
