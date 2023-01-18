@@ -20,6 +20,7 @@ import com.example.padsou.ui.SignIn.SignInView
 import com.example.padsou.ui.SignUp.SignUpView
 import com.example.padsou.ui.add_plan.AddPlanPhotoPage
 import com.example.padsou.ui.add_plan.AddPlanView
+import com.example.padsou.ui.allplans.AllPlansView
 import com.example.padsou.ui.home.HomeView
 import com.example.padsou.ui.home.HomeViewModel
 import com.example.padsou.ui.onboarding.onBoardingPage
@@ -89,6 +90,12 @@ fun PadsouNavHost(
         ){ backStackEntry ->
             val planId = backStackEntry.arguments?.getString("planId")
             PlanDetailsView(navController, planId)
+        }
+        composable(
+            Screen.AllPlans.route,
+        ){
+
+            AllPlansView(navController)
         }
     }
 }

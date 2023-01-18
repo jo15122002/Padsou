@@ -1,4 +1,7 @@
-package com.example.padsou.ui.home
+package com.example.padsou.ui.allplans
+
+import com.example.padsou.ui.home.HomePage
+
 
 import android.os.Build
 import android.util.Log
@@ -14,30 +17,27 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.padsou.data.static.Screen
+import com.example.padsou.ui.plansbycategories.PlansByCategoriesViewModel
 import com.example.padsou.ui.shared.Layout
 
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun HomeView(navController: NavHostController){
+fun AllPlansView(navController: NavHostController, viewModel: AllPlansViewModel = AllPlansViewModel()){
 
-    Log.d("ViewModel", "init home view")
 
     Layout(
         navController = navController,
         content = {
             Box(Modifier.fillMaxHeight()){
-                HomePage(
-                    onCategoryClick = { id ->
-                        navController.navigate(Screen.PlansByCategory.route+"/"+id)
+                    AllPlansPage(
+                    navigateBack = {
+                        navController.navigate(Screen.Home.route)
                     },
                     onPlanClick = { id ->
                         navController.navigate(Screen.PlanDetails.route+"/"+id)
                     },
-                    onVoirTout = {
-                        Log.d("allPlans", "navigate")
-                        navController.navigate(Screen.AllPlans.route)
-                    }
+                    viewModel
                 )
             }
         }
@@ -48,5 +48,5 @@ fun HomeView(navController: NavHostController){
 @Preview(showBackground = true)
 @Composable
 fun DefaultHomeViewPreview() {
-    HomeView(navController = rememberNavController())
+    AllPlansView(navController = rememberNavController())
 }
