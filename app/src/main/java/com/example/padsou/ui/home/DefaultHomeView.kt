@@ -3,6 +3,7 @@ package com.example.padsou.ui.home
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
@@ -28,7 +29,7 @@ import java.util.Locale.Category
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DefaultHomeView(viewModel: HomeViewModel, onCategoryClick: (id: String)->Unit, onPlanClick: (id: String)->Unit){
+fun DefaultHomeView(viewModel: HomeViewModel, onCategoryClick: (id: String)->Unit, onPlanClick: (id: String)->Unit, onVoirTout: ()->Unit){
 
     val categories: State<List<com.example.padsou.data.models.Category>> = viewModel.categories.collectAsState()
     val plans: State<List<Plan>> = viewModel.plans.collectAsState()
@@ -49,7 +50,13 @@ fun DefaultHomeView(viewModel: HomeViewModel, onCategoryClick: (id: String)->Uni
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text("Les plans du moments", style = MaterialTheme.typography.h4)
-        Text("Voir tout", color = SeeMore, fontWeight = FontWeight.W700)
+        Text(
+            "Voir tout",
+            color = SeeMore,
+            fontWeight = FontWeight.W700,
+            modifier = Modifier.clickable {
+                onVoirTout()
+            })
     }
     ListPlanProfile(plans.value, onPlanClick)
 }

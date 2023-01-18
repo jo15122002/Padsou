@@ -57,6 +57,7 @@ object Manager {
         if(plans.value.size == 0){
             loadPlans(onGet)
         }else{
+
             onGet(_plans.value)
         }
     }
