@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.padsou.data.managers.ImageManager
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Plan
 import com.example.padsou.data.models.User
 import com.example.padsou.data.static.Screen
@@ -57,18 +58,9 @@ fun PlanProfile(
 
     var logo by remember { mutableStateOf("") }
 
-    //Todo à revenir pour utiliser le manager
-    if(!plan.userId.toString().isEmpty()){
-        db.collection("users")
-            .document(plan.userId)
-            .get()
-            .addOnSuccessListener { users->
-                var profilePic = users.getField<String>("profilePic")
-                if(profilePic.toString() != ""){
-                    logo = profilePic.toString()
-                }
-            }
-    }
+    Manager.getUser(plan.userId, onGet = { user ->
+        logo = user.profilePic
+    })
 
     val imageModifier = Modifier
         .then(
