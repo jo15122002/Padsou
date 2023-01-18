@@ -57,6 +57,7 @@ fun PlanProfile(
 
     var logo by remember { mutableStateOf("") }
 
+    //Todo à revenir pour utiliser le manager
     if(!plan.userId.toString().isEmpty()){
         db.collection("users")
             .document(plan.userId)
@@ -142,7 +143,6 @@ fun PlanProfile(
                     )
 
                     if(plan.userId.isNotEmpty() && logo.isNotEmpty() && logo != null && logo != "null"){
-                        println("***" + logo)
                         Image(
                             bitmap = ImageManager.decodeBase64ToImageBitmap(logo),
                             contentDescription = "",
