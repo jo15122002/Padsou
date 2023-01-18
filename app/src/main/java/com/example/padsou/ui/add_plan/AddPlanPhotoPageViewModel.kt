@@ -9,6 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.padsou.data.managers.ImageManager
+import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.Plan
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -40,8 +41,12 @@ object AddPlanPhotoPageViewModel : ViewModel(){
     }
 
     fun uploadPlan(onSuccess : () -> Unit){
+        this.plan.logoUrl = ""
+        this.plan.photoUrl = ""
         db.collection("plans").add(this.plan).addOnSuccessListener {
-            onSuccess()
+            Manager.loadPlans {
+                onSuccess()
+            }
         }
     }
 }
