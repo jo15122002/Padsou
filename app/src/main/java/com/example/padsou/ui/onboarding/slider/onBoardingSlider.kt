@@ -1,5 +1,7 @@
 package com.example.padsou.ui.onboarding
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -20,6 +22,7 @@ import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun onBoardingSlider(){
 
