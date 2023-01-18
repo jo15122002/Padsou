@@ -1,6 +1,8 @@
 package com.example.padsou.ui.SignIn
 
+import android.os.Build
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -39,6 +41,7 @@ import com.google.firebase.ktx.Firebase
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.time.format.TextStyle
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignInView(onNavigateToHome: () -> Unit, onNavigateToSignUp: () -> Unit){
 

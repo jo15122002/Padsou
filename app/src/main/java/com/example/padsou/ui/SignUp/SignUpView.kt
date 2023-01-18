@@ -1,5 +1,7 @@
 package com.example.padsou.ui.SignUp
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -25,6 +27,7 @@ import com.example.padsou.ui.theme.BackgroundWhite
 import com.example.padsou.ui.theme.MainPurple
 import com.example.padsou.ui.theme.TextGray
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun SignUpView(onNavigateToSignIn : ()->Unit, onNavigateToPlans : ()->Unit){
 
@@ -97,6 +100,7 @@ fun SignUpView(onNavigateToSignIn : ()->Unit, onNavigateToPlans : ()->Unit){
 }
 
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun SignUpViewPreview() {

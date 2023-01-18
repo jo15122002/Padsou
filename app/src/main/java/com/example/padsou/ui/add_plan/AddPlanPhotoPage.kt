@@ -108,7 +108,6 @@ fun AddPlanPhotoContentPage(navController : NavHostController){
                     .aspectRatio(1f)
                     .clickable {
                         galleryLauncher.launch("image/*")
-
                     },
                     contentAlignment = Alignment.Center,
                 ){
