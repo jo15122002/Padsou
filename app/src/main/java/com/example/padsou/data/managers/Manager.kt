@@ -29,7 +29,7 @@ object Manager {
         })
     }
 
-    private fun loadPlans(onGet: (MutableList<Plan>)->Unit){
+    fun loadPlans(onGet: (MutableList<Plan>)->Unit){
         Database.getAllPlan(onSuccess = { items ->
             _plans.value = items
             onGet(items)
