@@ -28,6 +28,7 @@ import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
+import com.example.padsou.ui.theme.MainCorail
 import com.example.padsou.ui.theme.MainPurple
 
 

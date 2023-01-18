@@ -24,6 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.padsou.ui.onboarding.slider.onBoardingSliderContent
 import com.example.padsou.ui.shared.SliderCheckmark
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
 
 
 @OptIn(ExperimentalPagerApi::class)
