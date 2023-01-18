@@ -1,11 +1,13 @@
 package com.example.padsou.data.managers
 
 import android.util.Log
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.toLowerCase
 import com.example.padsou.data.database.Database
 import com.example.padsou.data.models.Category
 import com.example.padsou.data.models.Plan
 import com.example.padsou.data.models.User
+import com.example.padsou.data.store.UserStore
 import com.google.firebase.firestore.ktx.getField
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -111,6 +113,11 @@ object Manager {
             val temp = _users.value.first{ it.id == id }
             onGet(temp)
         }
+    }
+
+    fun disconnectUser(){
+
+        this.user = null
     }
 
 }

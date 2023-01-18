@@ -38,7 +38,7 @@ import kotlin.math.log
 @Composable
 fun PadsouNavHost(
     navController: NavHostController = rememberNavController(),
-    startDestination: String = Screen.Home.route
+    startDestination: String = Screen.OnBoarding.route
 ){
     Log.d("ViewModel", "init nav host")
 

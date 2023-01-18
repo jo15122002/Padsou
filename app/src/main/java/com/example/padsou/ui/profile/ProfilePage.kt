@@ -18,6 +18,8 @@ import com.example.padsou.ui.theme.MainPurple
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,19 +27,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.sp
 import com.example.padsou.data.managers.ImageManager
 import com.example.padsou.data.managers.Manager
 import com.example.padsou.data.models.User
 import com.example.padsou.ui.shared.*
 import com.example.padsou.ui.theme.BackgroundWhite
-import com.example.padsou.ui.theme.SeeMore
+import com.example.padsou.ui.theme.MainCorail
 
 
 @RequiresApi(Build.VERSION_CODES.P)
 @Composable
-fun ProfilePage(){
+fun ProfilePage(onDisconnect: ()->Unit){
 
     val context = LocalContext.current
     val username = remember { InputState() }
@@ -103,7 +103,7 @@ fun ProfilePage(){
                     username.validate(null)
                 };
 
-                Email(email.text, email.error, "bradd.pitt@gmail.com", "E-mail"){
+                Email(email.text, email.error, placeholder = "bradd.pitt@gmail.com", title ="E-mail"){
                     email.text = it
                     email.validate(null)
                 };
@@ -113,8 +113,26 @@ fun ProfilePage(){
                     localisation.validate(null)
                 };
 
-                Box() {
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     saveAccountModificationButton(enabled = username.isValid() && email.isValid() && (localisation.isValid() || localisation.text == ""), email=email.text, username = username.text, adress = localisation.text , base64ProfilePic = newProfilePic, text = "SAUVGARDER TES INFORMATIONS", context = context )
+                    Button(
+                        onClick = {
+                            onDisconnect()
+                        },
+                        shape = RoundedCornerShape(15.dp),
+                        contentPadding = PaddingValues(horizontal = 90.dp, vertical = 18.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            backgroundColor = MainCorail,
+                            contentColor = Color.White
+                        ),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(56.dp),
+                        ) {
+                        Text(text = "Se déconnecter",
+                            color = Color.White,
+                            style = MaterialTheme.typography.h4)
+                    }
                 }
             }
         }
@@ -125,5 +143,5 @@ fun ProfilePage(){
 @Preview(showBackground = true)
 @Composable
 fun ProfilePagePreview() {
-    ProfilePage()
+    ProfilePage({})
 }
